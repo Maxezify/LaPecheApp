@@ -19,3 +19,7 @@
 .logo {
     margin-top: 5px;
 }
+
+label {
+    font-size: 15px;
+}
