@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    </head>
+
+    <body>
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+                <div class="row center">
+                    <a href="index.html"><img class="logo" src="img/logo.png" alt="logo" height="42" width="82"></a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                    <br>
+
+                <h4 class="header center orange-text">Inscrivez-vous ici !</h4>
+
+                <div class="row center">
+                    <h6 class="header col s12 light">Reseignez les champs ci-dessous</h6>
+                </div>
+
+                <!-- Début du Formulaire-->
+                <form method="post" action="#" id="monForm">
+
+                    <div class="row center">
+                        <label for="nom">Nom</label>
+                        <div class="col s12">
+                            <input type="text" name="nom" id="nom" class="validate" placeholder="Tapez votre nom ici">
+                        </div>
+                    </div>
+
+                        <br>
+
+                    <div class="row center">
+                        <label for="prenom">Prenom</label>
+                        <div class="col s12">
+                            <input type="text" name="prenom" id="prenom"  class="validate" placeholder="Tapez votre prenom ici">
+                        </div>
+                    </div>
+
+                        <br>
+
+                    <div class="row center">
+                        <label for="email">E-mail</label>
+                        <div class="col s12">
+                            <input type="text" name="email" id="email" class="validate" placeholder="Tapez votre adresse e-mail"   >
+                        </div>
+                    </div>
+
+                        <br>
+
+                    <div class="row center">
+                        <label for="mdp">Mot de Passe</label>
+                        <div class="col s12">
+                            <input type="password" name="mdp"  id="mdp" class="validate" placeholder="Tapez votre mot de passe ici">
+                        </div>
+                    </div>
+
+                    <div class="row center">
+                        <div class="col s12">
+                            <div class="btn-large waves-effect waves-light orange">
+                                <input type="submit" id="inscription" value="Inscription" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gif du chargement qui s'active lors du click-->
+                    <div class="row center">
+                        <div id="loader" style="display: none">
+                            <img src="img/ajax-loader.gif" alt="loader" />
+                        </div>
+                    </div>
+
+                </form>
+                <!-- Fin du Formulaire-->
+
+
+            </div>
+        </div>
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $("#monForm").submit(function () {
+
+                    $("#loader").show(); //gif
+
+                    //.val() recuperation de valeur entré dans le formulaire
+                    nom = $(this).find("input[name=nom]").val();
+                    prenom = $(this).find("input[name=prenom]").val();
+                    email = $(this).find("input[name=email]").val(); 
+                    mdp = $(this).find("input[name=mdp]").val();
+
+                    $.post('http://test-peche.ouvaton.org/cible_inscription.php', {
+                        nom: nom,
+                        prenom: prenom,
+                        email: email,
+                        mdp: mdp
+                    }, function (data) {
+                        $("#loader").hide();
+                        //alert(data);
+                    })
+
+                    return false;
+
+                });
+
+            });
+        </script>
+
+    </body>
+
+</html>
