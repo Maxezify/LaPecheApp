@@ -12,6 +12,21 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
     </head>
 
     <body>
@@ -30,14 +45,33 @@
 
                 <h4 class="header center orange-text">Vous vous etes connecté correctement !</h4>
 
-                <div class="row center">
 
-                    <div class="col s12">
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="mydiv">
+                        </div>
                     </div>
-
                 </div>
 
-            </div>
+                <div class="row center">
+                    <div class="col s12">
+                        <a href="page_ajout_boutique.html">Modification boutique</a>
+                    </div>
+                </div>
+
+                <div class="row center">
+                    <div class="col s12">
+                        <a href="page_infos_boutique.html">Infos boutique</a>
+                    </div>
+                </div>
+
+                <div class="row center">
+                    <div class="col s12">
+                        <a href="deco.html">Deconnexion</a>
+                    </div>
+                </div>
+
+            
         </div>
 
 
@@ -47,6 +81,14 @@
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+
+
+            document.getElementById('mydiv').innerHTML = 'Bonjour '+prenom; //ajout du prenom dans le DOM
+            //alert(div.innerHTML);
+
+        </script>
 
 
 

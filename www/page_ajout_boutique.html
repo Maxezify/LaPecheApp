@@ -12,6 +12,19 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
+       <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
     </head>
 
     <body>
@@ -30,63 +43,61 @@
 
                     <br>
 
-                <h4 class="header center orange-text">Inscrivez-vous ici !</h4>
-
-                <div class="row center">
-                    <div style="font-size:20px">
-                        <div id="statut_inscription">
-                        </div>
-                    </div>
-                </div>
+                <h4 class="header center orange-text">Informations concernant votre commerce.</h4>
 
                 <div class="row center">
                     <h6 class="header col s12 light">Reseignez les champs ci-dessous</h6>
                 </div>
 
-
-
-
                 <!-- Début du Formulaire-->
                 <form method="post" action="#" id="monForm">
 
                     <div class="row center">
-                        <label for="nom">Nom</label>
+                        <label for="nom">Nom de la boutique</label>
                         <div class="col s12">
-                            <input type="text" name="nom" id="nom" class="validate" placeholder="Tapez votre nom ici">
+                            <input type="text" name="nom_boutique" id="nom_boutique" class="validate" placeholder="Tapez le nom de votre commerce">
                         </div>
                     </div>
 
                         <br>
 
                     <div class="row center">
-                        <label for="prenom">Prenom</label>
+                        <label for="prenom">Description</label>
                         <div class="col s12">
-                            <input type="text" name="prenom" id="prenom"  class="validate" placeholder="Tapez votre prenom ici">
+                            <textarea
+                                name="description" id="description"  class="validate" placeholder="Tapez une courte description de votre commerce"></textarea> 
                         </div>
                     </div>
 
                         <br>
 
                     <div class="row center">
-                        <label for="email">E-mail</label>
+                        <label for="email">Adresse</label>
                         <div class="col s12">
-                            <input type="text" name="email" id="email" class="validate" placeholder="Tapez votre adresse e-mail"   >
+                            <input type="text" name="adresse" id="adresse" class="validate" placeholder="Rue, Avenue,..."   >
+                        </div>
+                    </div>
+
+                    <div class="row center">
+                        <label for="email">Ville</label>
+                        <div class="col s12">
+                            <input type="text" name="ville" id="ville" class="validate" placeholder="Ville"   >
                         </div>
                     </div>
 
                         <br>
 
                     <div class="row center">
-                        <label for="mdp">Mot de Passe</label>
+                        <label for="mdp">Horaire</label>
                         <div class="col s12">
-                            <input type="password" name="mdp"  id="mdp" class="validate" placeholder="Tapez votre mot de passe ici">
+                            <input type="text" name="horaire"  id="horaire" class="validate" placeholder="Ex: 7h-18h ou 7h-12h et 14h-16h">
                         </div>
                     </div>
 
                     <div class="row center">
                         <div class="col s12">
                             <div class="btn-large waves-effect waves-light orange">
-                                <input type="submit" id="inscription" value="Inscription" />
+                                <input type="submit" id="commerce" value="Valider" />
                             </div>
                         </div>
                     </div>
@@ -111,38 +122,31 @@
 
         <script type="text/javascript">
             $(function () {
+
                 $("#monForm").submit(function () {
 
                     $("#loader").show(); //gif
 
                     //.val() recuperation de valeur entré dans le formulaire
-                    nom = $(this).find("input[name=nom]").val();
-                    prenom = $(this).find("input[name=prenom]").val();
-                    email = $(this).find("input[name=email]").val(); 
-                    mdp = $(this).find("input[name=mdp]").val();
+                    nom_boutique = $(this).find("input[name=nom_boutique]").val();
+                    description = $(this).find("textarea[name=description]").val();
+                    adresse = $(this).find("input[name=adresse]").val(); 
+                    ville = $(this).find("input[name=ville]").val();
+                    horaire = $(this).find("input[name=horaire]").val();
+                   
+                    
 
-                    $.post('cible_inscription.php', {
-                        nom: nom,
-                        prenom: prenom,
-                        email: email,
-                        mdp: mdp
+                    $.post('cible_ajout_boutique.php', {
+                        nom_boutique: nom_boutique,
+                        description: description,
+                        adresse: adresse,
+                        ville: ville,
+                        horaire: horaire,
+                        id: id_utili
+
                     }, function (data) {
                         $("#loader").hide();
                         alert(data);
-
-                        //ajout du statut de l'inscription (reussi ou non) dans le DOM
-                        if(data=='Vous vous êtes inscrit correctement !')
-                        {   
-                            document.getElementById('statut_inscription').innerHTML = 'Inscription Réussie !'; 
-                        }
-                        else if(data=='Vous n\'avez pas rempli tous les champs, recommencez !')
-                        {
-                            document.getElementById('statut_inscription').innerHTML = 'Vous n\'avez pas rempli tous les champs, recommencez.'; 
-                        }
-                        else if(data=='Email déjà utilisé.')
-                        {
-                            document.getElementById('statut_inscription').innerHTML = 'Cette email est déjà utilisé, choissisez-en une autre.'
-                        }
                     })
 
                     return false;

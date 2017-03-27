@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    </head>
+
+    <body>
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+                <div class="row center">
+                    <img class="logo" src="img/logo.png" alt="logo" height="42" width="82">
+                </div>
+            </div>
+        </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                <h4 class="header center orange-text">Paiement!</h4>
+
+                <div class="row center">
+
+                    <h6 class="header col s12 light">Ecrivez le nom du commerce auquel vous voulez payer ainsi que le montant de la transaction.</h6>
+
+                        <br/>
+                        <br/>
+                    <!-- Début du Formulaire-->
+                    <form method="post" action="#" id="monForm">
+                        <div class="row center">                                          
+                            <div class="col s12">
+                                <label for="paiment_nom_commerce">Nom du commerce</label>
+                                <input type="text" name="paiment_nom_commerce" id="paiement_nom_commerce"  class="validate" placeholder="Tapez le nom du commerce">
+                            </div>
+                        </div>
+
+                            <br/>
+
+                        <div class="row center">
+                            <label for="montant">Montant</label>
+                            <div class="col s12">
+                                <input type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
+                            </div>
+                        </div>
+
+                        <br/>
+
+                        <div class="row center">
+                            <div class="col s12">
+                                <div class="btn-large waves-effect waves-light orange">
+                                    <input type="submit" id="payer" value="Payer" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gif du chargement qui s'active lors du click -->
+                        <div id="loader" style="display: none">
+                            <img src="img/ajax-loader.gif" alt="loader" />
+                        </div>
+
+                    </form>
+                    <!-- Fin du Formulaire-->
+                    
+
+                </div>
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $("#monForm").submit(function () {
+
+                    $("#loader").show(); //gif
+                    email = $(this).find("input[name=email]").val(); //.val() recuperation de valeur entré dans le formulaire
+                    mdp = $(this).find("input[name=mdp]").val();
+
+                    $.post('cible_connexion.php', 
+                        {
+                            email: email,
+                            mdp: mdp
+                        }, function (data) 
+
+                        {
+
+                            $("#loader").hide();
+                            alert(data);
+
+                            var text = data;
+                            var obj = JSON.parse(text);
+
+                            window.localStorage.setItem("prenom", obj.prenom);
+                            window.localStorage.setItem("ID_utilisateurs", obj.ID_utilisateurs);
+                            window.localStorage.setItem("nombre", obj.nombre);
+                 
+
+                            var nombre = window.localStorage.getItem("nombre");
+                            var prenom = window.localStorage.getItem("prenom");
+                            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+                                                     
+                            
+                          
+                            alert(nombre);
+                            alert(prenom);
+                            alert(id_utili);
+                            
+
+                            if(nombre==42 && id_utili!=0)
+                            {
+                                document.location.href="page_connecte.html";
+                            }
+
+
+                        }
+                    )
+
+                    return false;
+
+                });
+
+            });
+        </script>
+
+    </body>
+
+</html>

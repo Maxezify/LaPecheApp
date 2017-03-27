@@ -3,7 +3,7 @@
 
 	try
 	{
-		$bdd = new PDO('mysql:host=sql01.ouvaton.coop;dbname=07769_appli;charset=utf8','07769_appli','aqzsedrf1',array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+		$bdd = new PDO('mysql:host=localhost;dbname=application;charset=utf8','root','',array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 	}
 	catch(Exception $e)
 	{
@@ -35,19 +35,22 @@
 		}
 		else
 		{
+			
 	
+			session_start();
+			$_SESSION['ID'] = $resultat['ID_utilisateurs'];
+			$_SESSION['prenom'] = $resultat['Prenom'];
 
 			$identifiant = array();
 
 
 			$identifiant['prenom'] = $resultat['Prenom'];
 			$identifiant['ID_utilisateurs'] = $resultat['ID_utilisateurs'];
-			//$identifiant['id_aleatoire'] = random_int(1,1000000);
-			$identifiant['nombre'] = 1;
+			$identifiant['nombre'] = 42;
 
-			sleep(2);
+			sleep(1);
 			echo json_encode($identifiant);
-			//echo 'caca';
+			
 
 
 			
@@ -57,7 +60,7 @@
 	}
 	else
 	{
-		echo'Veuillez indiquer votre email ou/et votre mot de passe.';
+		echo 'Veuillez indiquer votre email ou/et votre mot de passe.' ;
 	}
 
 
