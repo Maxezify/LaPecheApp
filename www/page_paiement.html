@@ -12,6 +12,8 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
+
+
     </head>
 
     <body>
@@ -25,52 +27,67 @@
         </nav>
 
         <div class="section no-pad-bot" id="index-banner">
-
             <div class="container">
 
                 <h4 class="header center orange-text">Paiement!</h4>
 
                 <div class="row center">
-
                     <h6 class="header col s12 light">Ecrivez le nom du commerce auquel vous voulez payer ainsi que le montant de la transaction.</h6>
+                </div>
+
+                <div class="row center">
+                    <h6 class="header col s12 light">Votre Solde actuel : </h6> 
+                </div>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="nombre_peche">
+                        </div>
+                    </div>
+                </div>
+              
+                        <br/>
+                        <br/> 
+
+
+                <!-- Début du Formulaire-->
+                <form method="post" action="#" id="monForm">
+
+                    <div class="row center">                                          
+                        <div class="col s12">
+                            <label for="paiement_nom_commerce">Nom du commerce</label>
+                            <input type="text" name="paiement_nom_commerce" id="paiement_nom_commerce"  class="validate" placeholder="Tapez le nom du commerce">
+                        </div>
+                    </div>
 
                         <br/>
-                        <br/>
-                    <!-- Début du Formulaire-->
-                    <form method="post" action="#" id="monForm">
-                        <div class="row center">                                          
-                            <div class="col s12">
-                                <label for="paiment_nom_commerce">Nom du commerce</label>
-                                <input type="text" name="paiment_nom_commerce" id="paiement_nom_commerce"  class="validate" placeholder="Tapez le nom du commerce">
-                            </div>
-                        </div>
 
-                            <br/>
-
-                        <div class="row center">
-                            <label for="montant">Montant</label>
-                            <div class="col s12">
-                                <input type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
-                            </div>
+                    <div class="row center">
+                        <label for="montant">Montant</label>
+                        <div class="col s12">
+                            <input type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
                         </div>
+                    </div>
 
                         <br/>
 
-                        <div class="row center">
-                            <div class="col s12">
-                                <div class="btn-large waves-effect waves-light orange">
-                                    <input type="submit" id="payer" value="Payer" />
-                                </div>
+                    <div class="row center">
+                        <div class="col s12">
+                            <div class="btn-large waves-effect waves-light orange">
+                                <input type="submit" id="payer" value="Payer" />
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Gif du chargement qui s'active lors du click -->
-                        <div id="loader" style="display: none">
-                            <img src="img/ajax-loader.gif" alt="loader" />
-                        </div>
+                    <!-- Gif du chargement qui s'active lors du click -->
+                    <div class="row center">
+                      <div id="loader" style="display: none">
+                          <img src="img/ajax-loader.gif" alt="loader" />
+                      </div>
+                    </div>
 
-                    </form>
-                    <!-- Fin du Formulaire-->
+                </form>
+                <!-- Fin du Formulaire-->
                     
 
                 </div>
@@ -80,59 +97,72 @@
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        
 
         <script type="text/javascript">
-            $(function () {
+
+        
+        //Nombre de peche de l'utilisateur connecté ------------------------------------------
+            $.post('cible_infos_peche.php',{}, function (data) {
+            //$("#loader").hide();
+            var text = data;
+            var obj = JSON.parse(text);
+
+            window.localStorage.setItem("solde", obj.Nombre_peche);         
+            
+            document.getElementById('nombre_peche').innerHTML = obj.Nombre_peche+ ' Pêches';}); 
+
+        //-------------------------------------------------------------------------------------
+
+        //Liste déroulante des commerce enregistré dans la bdd --------------------------------
+        /*Pour fonctionner, ce widget doit prend un paramètre obligatoire, celui-ci nécessite d'utiliser une option indiquant la liste des propositions à afficher. Ce paramètre se nomme source, et prend en valeur un tableau contenant chaque suggestion
+        cf openclassroom */
+
+          $('#paiement_nom_commerce').autocomplete({
+              source : 'cible_paiement1_autocompletion.php',
+
+          });
+           
+        //-------------------------------------------------------------------------------------
+
+        //Modification du solde Peche pour l'utilisateur et le commercant de la boutique apres avoir payé sur le bouton Payer
+        /*function Confirmer(){
+          if (confirm("Etes vous sûr d'avoir correctement rempli les champs précédents ?")) 
+          {*/
+
+           $(function () {
                 $("#monForm").submit(function () {
 
                     $("#loader").show(); //gif
-                    email = $(this).find("input[name=email]").val(); //.val() recuperation de valeur entré dans le formulaire
-                    mdp = $(this).find("input[name=mdp]").val();
 
-                    $.post('cible_connexion.php', 
-                        {
-                            email: email,
-                            mdp: mdp
-                        }, function (data) 
+                    //.val() recuperation de valeur entré dans le formulaire
+                    nom_commerce = $(this).find("input[name=paiement_nom_commerce]").val();
+                    montant = $(this).find("input[name=montant]").val();
+                    var solde = window.localStorage.getItem("solde");
 
-                        {
+                    $.post('cible_paiement2_modif_solde.php', {
+                        nom_commerce: nom_commerce,
+                        montant: montant,
+                        solde: solde
+                    }, function (data) {
+                        $("#loader").hide();
+                        alert(data);
+                        window.location.reload();
 
-                            $("#loader").hide();
-                            alert(data);
-
-                            var text = data;
-                            var obj = JSON.parse(text);
-
-                            window.localStorage.setItem("prenom", obj.prenom);
-                            window.localStorage.setItem("ID_utilisateurs", obj.ID_utilisateurs);
-                            window.localStorage.setItem("nombre", obj.nombre);
-                 
-
-                            var nombre = window.localStorage.getItem("nombre");
-                            var prenom = window.localStorage.getItem("prenom");
-                            var id_utili = window.localStorage.getItem("ID_utilisateurs");
-                                                     
-                            
-                          
-                            alert(nombre);
-                            alert(prenom);
-                            alert(id_utili);
-                            
-
-                            if(nombre==42 && id_utili!=0)
-                            {
-                                document.location.href="page_connecte.html";
-                            }
-
-
-                        }
-                    )
+                        
+                    })
 
                     return false;
 
                 });
 
             });
+
+
+        
+
+
         </script>
 
     </body>

@@ -12,10 +12,10 @@
 	}
 	
 
-	echo $_POST['nom_boutique'];
+	/*echo $_POST['nom_boutique'];
 	echo '<pre>';
 	echo $_POST['description'];
-	/*echo '<pre>';
+	echo '<pre>';
 	echo $_POST['adresse'];
 	echo '<pre>';
 	echo $_POST['ville'];
@@ -25,6 +25,13 @@
 	
 
 	//Modification Nom de la boutique 
+
+	$nom=0;
+	$descri=0;
+	$adresse=0;
+	$ville=0;
+	$horaire=0;
+
 	if(!empty($_POST['nom_boutique']))
 	{
 		$req=$bdd ->prepare('UPDATE commercant
@@ -35,12 +42,9 @@
 				'nom_boutique'=>$_POST['nom_boutique'],
 				'ID_utilisateurs' => $_SESSION['ID']));
 			
-		echo '<p>Modif reussi ! </br> </p>';
+		$nom=1;
 	}
-	else
-	{
-		echo'Veuillez renseigner le champ Nom de la boutique';
-	}
+
 
 	//Modification de la description
 	if(!empty($_POST['description']))
@@ -53,12 +57,9 @@
 				'description'=>$_POST['description'],
 				'ID_utilisateurs' => $_SESSION['ID']));
 			
-		echo '<p>Modif reussi ! </br> </p>';
+		$descri=1;
 	}
-	else
-	{
-		echo'Veuillez renseigner le champ Description';
-	}
+
 
 	//Modification de l'adresse
 	if(!empty($_POST['adresse']))
@@ -71,14 +72,13 @@
 				'adresse'=>$_POST['adresse'],
 				'ID_utilisateurs' => $_SESSION['ID']));
 			
-		echo '<p>Modif reussi ! </br> </p>';
-	}
-	else
-	{
-		echo'Veuillez renseigner le champs adresse';
+		$adresse=1;
+
+
 	}
 
-	/*//Modification de la ville 
+
+	//Modification de la ville 
 	if(!empty($_POST['ville']))
 	{
 		$req=$bdd ->prepare('UPDATE commercant
@@ -89,12 +89,9 @@
 				'ville'=>$_POST['ville'],
 				'ID_utilisateurs' => $_SESSION['ID']));
 			
-		echo '<p>Modif reussi ! </br> </p>';
+		$ville = 1;
 	}
-	else
-	{
-		echo'Veuillez renseigner le champs';
-	}
+
 
 	//Modification des horaires
 	if(!empty($_POST['horaire']))
@@ -107,12 +104,18 @@
 				'horaire'=>$_POST['horaire'],
 				'ID_utilisateurs' => $_SESSION['ID']));
 			
-		echo '<p>Modif reussi ! </br> </p>';
+		$horaire=1;
 	}
+
+
+	//Condition permettant le retour d'information
+	if($nom==1 OR $descri==1 OR $adresse==1 OR $ville==1 OR $horaire==1)
+		echo 'Modification reussie.';
 	else
-	{
-		echo'Veuillez renseigner le champs';
-	}*/
+		echo 'Echec de la modification, veuillez rééssayer.';
+
+
+
 
 
 

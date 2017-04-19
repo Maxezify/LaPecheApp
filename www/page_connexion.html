@@ -76,6 +76,8 @@
                     <br/>
                     <br/>
                     <a href="page_inscription.html"><h6>Vous n'avez pas de compte ?</h6></a>
+                    <a href="test.html"><h6>test</h6></a>
+
 
                 </div>
 
@@ -107,17 +109,18 @@
                             var text = data;
                             var obj = JSON.parse(text);
 
+                            window.localStorage.setItem("email", obj.email);
                             window.localStorage.setItem("prenom", obj.prenom);
                             window.localStorage.setItem("ID_utilisateurs", obj.ID_utilisateurs);
                             window.localStorage.setItem("nombre", obj.nombre);
                  
-
+                            var email = window.localStorage.getItem("email");
                             var nombre = window.localStorage.getItem("nombre");
                             var prenom = window.localStorage.getItem("prenom");
                             var id_utili = window.localStorage.getItem("ID_utilisateurs");
                                                      
                             
-                          
+                            alert(email);
                             alert(nombre);
                             alert(prenom);
                             alert(id_utili);

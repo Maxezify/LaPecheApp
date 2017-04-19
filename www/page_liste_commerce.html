@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+
+    <body>
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+                <div class="row center">
+                    <img class="logo" src="img/logo.png" alt="logo" height="42" width="82">
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                <h4 class="header center orange-text">Liste des commerces partenaires !</h4>
+
+                <!-- Div la liste des commerces -->
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="liste_commerce">
+                            <table>
+                                <tbody id="infos">
+                                    <tr>
+                                        <td>Nom boutique</td>
+                                        <td>Description</td>
+                                        <td>Adresse</td>
+                                        <td>Ville</td>
+                                        <td>Horaire</td>
+                                    </tr> 
+                                </tbody> 
+                            </table>
+                             
+                                 
+                            
+                          
+
+                        </div>
+                    </div>
+                </div>
+                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+
+
+
+
+
+            </div>  
+
+        </div>
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+
+       
+
+        //ajout de certains élément dans le DOM
+            //Prenom de l'utilisateur connecté
+
+            //Nombre de peche de l'utilisateur connecté
+            $.post('cible_liste_commerce.php',{}, function (data) {
+            //$("#loader").hide();
+            alert(data);
+
+            var text = data;
+            var obj = JSON.parse(text);
+           
+
+            //$("#liste_commerce").html('<table><tr><td>Nom boutique</td><td>Description</td><td>Adresse</td><td>Ville</td><td>Horaire</td></tr></table>');
+
+            for (var i = 1; i <=obj[0]; i++) 
+            {
+                //alert(obj[i].Nom_boutique);
+                //document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
+                //var boutique = document.createElement('div');
+               /* document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
+                document.getElementById('description').innerHTML = obj[i].Description;
+                document.getElementById('adresse').innerHTML = obj[i].Ville;
+                document.getElementById('ville').innerHTML = obj[i].Adresse;
+                document.getElementById('horaire').innerHTML = obj[i].Horaire;*/
+
+                $("#infos").append('<tr><td>'+obj[i].Nom_boutique+'</td><td>'+obj[i].Description+'</td><td>'+obj[i].Adresse+'</td><td>'+obj[i].Ville+'</td><td>'+obj[i].Horaire+'<td></tr>');
+
+
+
+                
+            }
+            
+            
+            
+
+           
+            
+
+        });
+
+            // 
+
+            
+
+
+
+
+
+
+           
+
+        </script>
+
+
+
+    </body>
+
+</html>
