@@ -107,31 +107,38 @@
 
             <div class="container">
 
-                <h4 class="header center orange-text">Liste des commerces partenaires</h4>
+                <h4 class="header center orange-text">Bons Plans</h4>
 
-                <!-- Div la liste des commerces -->
                 <div class="col s12">
                     <div class="row center">
-                        <div id="liste_commerce">
-                            <table>
-                                <tbody id="infos">
-                                    <tr>
-                                        <td>Nom boutique</td>
-                                        <td>Description</td>
-                                        <td>Adresse</td>
-                                        <td>Ville</td>
-                                        <td>Horaire</td>
-                                    </tr> 
-                                </tbody> 
-                            </table>
-                             
+                        <p>Bon plan en cours</p>
+                        <div id="bon_plan_en_cours">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <p>Anciens bons plans</p>
+                        <div id="anciens_bon_plans">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <a href="page_ajouter_bon_plan.html">
+                            <p>Ajouter un bon plan</p>
+                        </a>
+                    </div>
+                </div>
+
+               
                                  
                             
                           
 
-                        </div>
-                    </div>
-                </div>
+            
                  <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
 
 
@@ -159,53 +166,7 @@
             document.getElementById('prenom').innerHTML = prenom;
             document.getElementById('email').innerHTML = email;  
 
-            //Nombre de peche de l'utilisateur connecté
-            $.post('cible_liste_commerce.php',{}, function (data) {
-            //$("#loader").hide();
-            alert(data);
-
-            var text = data;
-            var obj = JSON.parse(text);
-           
-
-            //$("#liste_commerce").html('<table><tr><td>Nom boutique</td><td>Description</td><td>Adresse</td><td>Ville</td><td>Horaire</td></tr></table>');
-
-            for (var i = 1; i <=obj[0]; i++) 
-            {
-                //alert(obj[i].Nom_boutique);
-                //document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
-                //var boutique = document.createElement('div');
-               /* document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
-                document.getElementById('description').innerHTML = obj[i].Description;
-                document.getElementById('adresse').innerHTML = obj[i].Ville;
-                document.getElementById('ville').innerHTML = obj[i].Adresse;
-                document.getElementById('horaire').innerHTML = obj[i].Horaire;*/
-
-                $("#infos").append('<tr><td>'+obj[i].Nom_boutique+'</td><td>'+obj[i].Description+'</td><td>'+obj[i].Adresse+'</td><td>'+obj[i].Ville+'</td><td>'+obj[i].Horaire+'<td></tr>');
-
-
-
-                
-            }
-            
-            
-            
-
-           
-            
-
-        });
-
-            // 
-
-            
-
-
-
-
-
-
-           
+         
 
         </script>
 

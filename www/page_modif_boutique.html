@@ -17,6 +17,7 @@
             // Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
             var nombre = window.localStorage.getItem("nombre");
             var prenom = window.localStorage.getItem("prenom");
+            var email = window.localStorage.getItem("email");
             var id_utili = window.localStorage.getItem("ID_utilisateurs");
 
             if(nombre!=42)
@@ -39,19 +40,78 @@
 
         <nav class="orange lighten-3" role="navigation">
             <div class="nav-wrapper container">
-                <div class="row center">
-                    <a href="index.html"><img class="logo" src="img/logo.png" alt="logo" height="42" width="82"></a>
-                </div>
+
+                <img class="brand-logo" src="img/logo.png" alt="logo" height="42" width="82">
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_perso.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!">
+                            <i class="material-icons">supervisor_account</i>
+                            Chat
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons">power_settings_new</i>
+                            Déconnexion
+                        </a>
+                    </li>
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
             </div>
-        </nav>
+      </nav>
+
+
 
         <div class="section no-pad-bot" id="index-banner">
 
             <div class="container">
-
-                    <br>
-
-                <a href="page_connecte.html">home de la page connecte</a>
 
 
                 <!-- Statut de la modification faite ou non -->
@@ -63,12 +123,11 @@
                 </div>
                 <!-- -->
 
-                <h4 class="header center orange-text">Modifier les informations concernant votre commerce.</h4>
-
+                <h4 class="header center orange-text">Informations concernant votre commerce</h4>
 
 
                 <div class="row center">
-                    <h6 class="header col s12 light">Reseignez les champs ci-dessous</h6>
+                    <h6 class="header col s12 light">Cliquez sur la petite icone pour pouvoir modifier les différentes informations.</h6>
                 </div>
 
                 <!-- Début du Formulaire-->
@@ -157,6 +216,8 @@
                 </form>
                 <!-- Fin du Formulaire-->
 
+                <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+
 
             </div>
         </div>
@@ -166,7 +227,13 @@
         <script src="js/init.js"></script>
 
         <script type="text/javascript">
-            
+
+            //ajout de certains élément dans le DOM
+                //Prenom et Email de l'utilisateur connecté
+                document.getElementById('prenom').innerHTML = prenom;
+                document.getElementById('email').innerHTML = email;  
+                
+            //Recuperation des infos de la boutique
                 $.post('cible_infos_boutique.php', {
                         id: id_utili
 

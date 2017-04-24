@@ -107,35 +107,67 @@
 
             <div class="container">
 
-                <h4 class="header center orange-text">Liste des commerces partenaires</h4>
+                <h4 class="header center orange-text">Nouveau bon plan</h4>
 
-                <!-- Div la liste des commerces -->
                 <div class="col s12">
                     <div class="row center">
-                        <div id="liste_commerce">
-                            <table>
-                                <tbody id="infos">
-                                    <tr>
-                                        <td>Nom boutique</td>
-                                        <td>Description</td>
-                                        <td>Adresse</td>
-                                        <td>Ville</td>
-                                        <td>Horaire</td>
-                                    </tr> 
-                                </tbody> 
-                            </table>
-                             
-                                 
-                            
-                          
-
+                        <div id="nom_boutique">
                         </div>
                     </div>
                 </div>
+
+                <!-- Début du Formulaire-->
+                <form method="post" action="#" id="monForm">
+
+
+                    <p>Description : </p>
+              
+                    
+                 
+                        <div class="container">
+                            <textarea name="description" id="description"  class="validate" placeholder="Tapez une description du bon plan"></textarea> 
+                        </div>
+                   
+                         <p>Durée :</p>
+                         <div class="container">
+                             <table>
+                                 <tr>
+                                    <td>Du :</td>
+                                    <td><input id="datefield" type="date" name="date_debut"  min="2000-13-13" required></td>
+                                    <td><img src="img/date2.png" /></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Au :</td>
+                                    <td><input id="datefield2" type="date" name="date_fin" min="date_debut" required></td>
+                                    <td><img src="img/date2.png"></td>
+                                </tr>
+                             </table>
+                         </div>
+
+                    <div class="row center">
+                        <div class="col s12">
+                            <div class="btn-large waves-effect waves-light orange">
+                                <input type="submit" id="bon_plan" value="Créer" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gif du chargement qui s'active lors du click-->
+                    <div class="row center">
+                        <div id="loader" style="display: none">
+                            <img src="img/ajax-loader.gif" alt="loader" />
+                        </div>
+                    </div>
+
+
+               <br>           
+
+            
                  <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
 
 
-
+                 </form>
 
 
             </div>  
@@ -158,54 +190,93 @@
             //Prenom et Email de l'utilisateur connecté
             document.getElementById('prenom').innerHTML = prenom;
             document.getElementById('email').innerHTML = email;  
-
-            //Nombre de peche de l'utilisateur connecté
-            $.post('cible_liste_commerce.php',{}, function (data) {
-            //$("#loader").hide();
-            alert(data);
-
-            var text = data;
-            var obj = JSON.parse(text);
-           
-
-            //$("#liste_commerce").html('<table><tr><td>Nom boutique</td><td>Description</td><td>Adresse</td><td>Ville</td><td>Horaire</td></tr></table>');
-
-            for (var i = 1; i <=obj[0]; i++) 
-            {
-                //alert(obj[i].Nom_boutique);
-                //document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
-                //var boutique = document.createElement('div');
-               /* document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
-                document.getElementById('description').innerHTML = obj[i].Description;
-                document.getElementById('adresse').innerHTML = obj[i].Ville;
-                document.getElementById('ville').innerHTML = obj[i].Adresse;
-                document.getElementById('horaire').innerHTML = obj[i].Horaire;*/
-
-                $("#infos").append('<tr><td>'+obj[i].Nom_boutique+'</td><td>'+obj[i].Description+'</td><td>'+obj[i].Adresse+'</td><td>'+obj[i].Ville+'</td><td>'+obj[i].Horaire+'<td></tr>');
-
-
-
-                
-            }
             
-            
-            
+        //Date Range (Durée )--------------------------------------------------------
 
-           
-            
+        //2017-04-23
 
-        });
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+         if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
 
-            // 
-
-            
-
-
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("datefield").setAttribute("min", today);
+        document.getElementById("datefield2").setAttribute("min", today);
 
 
+            /*var Date_jour = new Date();
+            var date = Date_jour.getFullYear()+ '-' + Date_jour.getMonth()+ '-' +Date_jour.getDate();
 
 
-           
+            $("#date").append(date);*/
+
+        //------------------------------------------------
+
+        //Recuperation des infos de la boutique
+            $.post('cible_infos_boutique.php', {
+                    id: id_utili
+
+                    }, function (data) {
+
+                        //alert(data);
+
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //ajout des infos de la boutique  dans le DOM 
+                        document.getElementById('nom_boutique').innerHTML = obj.Nom_boutique; 
+
+                        //ID du commerce
+                         window.localStorage.setItem("id_commerce", obj.ID_commercant);
+                         var id_commerce = window.localStorage.getItem("id_commerce");
+                         alert(id_commerce);
+                 
+                        
+  
+                    });
+
+            //----------------------------------------------------------
+
+            $(function () {
+
+                $("#monForm").submit(function () {
+
+                    $("#loader").show(); //gif
+
+                     var id_commerce = window.localStorage.getItem("id_commerce");
+
+                    //.val() recuperation de valeur entré dans le formulaire
+                    description = $(this).find("textarea[name=description]").val();
+                    date_debut = $(this).find("input[name=date_debut]").val(); 
+                    date_fin = $(this).find("input[name=date_fin]").val();
+                   
+                    
+
+                    $.post('cible_ajouter_bon_plan.php', {
+                        description: description,
+                        date_debut: date_debut,
+                        date_fin: date_fin,
+                        id: id_utili,
+                        id_commerce: id_commerce
+
+                    }, function (data) {
+                        $("#loader").hide();
+                        alert(data);
+                    })
+
+                    return false;
+
+                });
+
+            });
+
+         
 
         </script>
 

@@ -17,7 +17,7 @@
 
 
 		//Recherche des infos du commerce dans la table commercant en fonction de la personne connecté
-		$lecture=$bdd ->prepare('SELECT Nom_boutique, Description, Adresse, Ville, Horaire
+		$lecture=$bdd ->prepare('SELECT ID_commercant, Nom_boutique, Description, Adresse, Ville, Horaire
 							 FROM commercant 
 							 WHERE ID_utilisateurs = :ID_utilisateurs');
 
@@ -28,7 +28,8 @@
 
 		//Recuperation des données sous forme de json
 		$infos_boutique = array();
-
+		
+		$infos_boutique['ID_commercant'] = $resultat['ID_commercant'];
 		$infos_boutique['Nom_boutique'] = $resultat['Nom_boutique'];
 		$infos_boutique['Description'] = $resultat['Description'];
 		$infos_boutique['Adresse'] = $resultat['Adresse'];

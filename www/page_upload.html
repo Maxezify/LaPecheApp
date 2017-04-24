@@ -28,6 +28,62 @@
             {
                 document.location.href="page_connexion.html";
             }
+
+
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Now safe to use device APIs
+        document.getElementById("uploadFile").addEventListener("click", uploadFile);
+        document.getElementById("downloadFile").addEventListener("click", downloadFile);
+    }
+
+function uploadFile() {
+   var fileURL = "///storage/emulated/0/DCIM/myFile"
+   var uri = encodeURI("http://posttestserver.com/post.php");
+   var options = new FileUploadOptions();
+    
+   options.fileKey = "file";
+   options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
+   options.mimeType = "text/plain";
+
+   var headers = {'headerParam':'headerValue'};
+   options.headers = headers;
+
+   var ft = new FileTransfer();
+
+   ft.upload(fileURL, uri, onSuccess, onError, options);
+
+   function onSuccess(r) {
+      console.log("Code = " + r.responseCode);
+      console.log("Response = " + r.response);
+      console.log("Sent = " + r.bytesSent);
+   }
+
+   function onError(error) {
+      alert("An error has occurred: Code = " + error.code);
+      console.log("upload error source " + error.source);
+      console.log("upload error target " + error.target);
+   }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
         </script>
 
     </head>
@@ -84,59 +140,18 @@
 
             <div class="container">
 
-                <h4 class="header center orange-text">Vous vous etes connecté correctement !</h4>
+                <h4 class="header center orange-text">Changer votre phot de profil !</h4>
 
                 <!-- Div contenant le prenom de la personne connecté -->
                 <div class="col s12">
                     <div class="row center">
-                        <div id="prenom">
-                        </div>
+                       
+                        <button id = "uploadFile">UPLOAD</button>
+                        <button id = "downloadFile">DOWNLOAD</button>
                     </div>
                 </div>
+            </div>
 
-                <!-- Div contenant le nombre de peche-->
-                <div class="col s12">
-                    <div class="row center">
-                        <div id="nombre_peche">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row center">
-                    <div class="col s12">
-                        <a href="page_ajout_boutique.html">Ajouter boutique</a>
-                    </div>
-                </div>
-
-                <div class="row center">
-                    <div class="col s12">
-                        <a href="page_modif_boutique.html">Modifier boutique</a>
-                    </div>
-                </div>
-
-                <div class="row center">
-                    <div class="col s12">
-                        <a href="page_liste_commerce.html">Liste des commerces</a>
-                    </div>
-                </div>
-
-                <div class="row center">
-                    <div class="col s12">
-                        <a href="page_paiement.html">Paiement</a>
-                    </div>
-                </div>
-
-                <div class="row center">
-                    <div class="col s12">
-                        <a href="page_bon_plan.html">Bons Plans</a>
-                    </div>
-                </div>
-
-                <div class="row center">
-                    <div class="col s12">
-                        <a href="deco.html">Deconnexion</a>
-                    </div>
-                </div>
 
             
         </div>
@@ -150,24 +165,6 @@
         <script src="js/init.js"></script>
 
         <script type="text/javascript">
-
-       
-
-        //ajout de certains élément dans le DOM
-            //Prenom et Email de l'utilisateur connecté
-            document.getElementById('prenom').innerHTML = prenom;
-            document.getElementById('email').innerHTML = email;  
-
-            //Nombre de peche de l'utilisateur connecté
-            $.post('cible_infos_peche.php',{}, function (data) {
-            //$("#loader").hide();
-            var text = data;
-            var obj = JSON.parse(text);
-            
-            document.getElementById('nombre_peche').innerHTML = 'Vous avez '+obj.Nombre_peche+ ' Pêches';}); 
-
-            
-
 
 
 
