@@ -20,21 +20,25 @@
 	echo $_POST['id_commerce'];
 
 
-	$date1 = new DateTime("14/02/2012");
-
-$date2 = new DateTime("12/03/2013");
-
-if( $date1 < $date2 ){
-
-    echo $date2->format('d/m/Y');
-
-}
-
 
 	if(!empty($_POST['description']) AND !empty($_POST['date_debut']) AND !empty($_POST['date_fin']) AND !empty($_POST['id_commerce']))
 	{
-		if($_POST['date_fin']<$_POST['date_debut'])
+
+
+
+
+		if($_POST['date_fin']>=$_POST['date_debut'])
 		{
+			//Inutile
+			/*$date_debut1= explode("-",$_POST['date_debut'] );
+			$date_fin1 = explode("-",$_POST['date_fin']);
+
+			$date_debut2=$date_debut1[2].'-'.$date_debut1[1].'-'.$date_debut1[0];
+			$date_fin2=$date_fin1[2].'-'.$date_fin1[1].'-'.$date_fin1[0];
+
+			echo $date_debut2;
+			echo $date_fin2;*/
+
 			$res=$bdd ->prepare('INSERT INTO bon_plan(Description, Date_debut, Date_fin, ID_commercant) 
 							VALUES(:description, :date_debut, :date_fin, :ID_commercant)');
 

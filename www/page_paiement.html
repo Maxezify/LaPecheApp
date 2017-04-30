@@ -232,11 +232,15 @@
                     nom_commerce = $(this).find("input[name=paiement_nom_commerce]").val();
                     montant = $(this).find("input[name=montant]").val();
                     var solde = window.localStorage.getItem("solde");
+                    var prenom = window.localStorage.getItem("prenom");
+                    var nom = window.localStorage.getItem("nom");
 
                     $.post('cible_paiement2_modif_solde.php', {
                         nom_commerce: nom_commerce,
                         montant: montant,
-                        solde: solde
+                        solde: solde,
+                        prenom: prenom,
+                        nom: nom
                     }, function (data) {
                         $("#loader").hide();
                         alert(data);

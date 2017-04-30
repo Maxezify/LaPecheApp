@@ -111,17 +111,25 @@
 
                 <div class="col s12">
                     <div class="row center">
-                        <p>Bon plan en cours</p>
-                        <div id="bon_plan_en_cours">
+                        <div id="i">
+                            <p>Bon plan en cours</p>
+                            <table>
+                                <tbody id="bon_plan_en_cours"></tbody> 
+                            </table>
+                        
                         </div>
                     </div>
                 </div>
 
+
                 <div class="col s12">
                     <div class="row center">
                         <p>Anciens bons plans</p>
-                        <div id="anciens_bon_plans">
-                        </div>
+                        
+                        <table>
+                                <tbody id="anciens_bon_plans"></tbody> 
+                        </table>
+                      
                     </div>
                 </div>
 
@@ -164,7 +172,50 @@
         //ajout de certains élément dans le DOM
             //Prenom et Email de l'utilisateur connecté
             document.getElementById('prenom').innerHTML = prenom;
-            document.getElementById('email').innerHTML = email;  
+            document.getElementById('email').innerHTML = email; 
+
+        //Recuperation des infos concernant les bons plans (en cours et ancien)
+
+            $.post('cible_infos_bon_plan.php', {}, function (data) {
+
+                        alert(data);
+
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //alert(obj);
+                        
+                        for (var i = 1; i <=obj[0]; i++) 
+                        {   
+                            if(obj[i].Status=='En cours')
+                            {
+                                $("#bon_plan_en_cours").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                            }
+                            else if(obj[i].Status=='Ancien')
+                            {
+                                $("#anciens_bon_plans").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                            }
+
+
+                            
+                        }
+                        
+                    });
+
+                //Actualise le status des bon plan en fonction de la date du jour
+                $.post('cible_actualiser_bon_plan.php', {}, function (data) {
+
+                        alert(data);
+
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //alert(obj);
+                        
+                    });            
+            
+
+
+
+            //---------------------------------------------------------- 
 
          
 

@@ -21,7 +21,7 @@
 		//hachage du mot de passe
 		$mdp_hache = sha1($_POST['mdp']);
 
-		$lecture=$bdd ->prepare('SELECT ID_utilisateurs, Prenom, Email 
+		$lecture=$bdd ->prepare('SELECT ID_utilisateurs, Nom, Prenom, Email 
 								 FROM utilisateurs 
 								 WHERE Email = :email AND Mot_de_passe = :mdp ');
 		$lecture->execute(array(
@@ -40,11 +40,13 @@
 			session_start();
 			$_SESSION['ID'] = $resultat['ID_utilisateurs'];
 			$_SESSION['prenom'] = $resultat['Prenom'];
+			$_SESSION['nom'] = $resultat['Nom'];
 
 			$identifiant = array();
 
 			$identifiant['email'] = $resultat['Email'];
 			$identifiant['prenom'] = $resultat['Prenom'];
+			$identifiant['nom'] = $resultat['Nom'];
 			$identifiant['ID_utilisateurs'] = $resultat['ID_utilisateurs'];
 			$identifiant['nombre'] = 42;
 
