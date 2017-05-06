@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
     <head>
 
@@ -14,12 +14,11 @@
 
     </head>
 
-    <body>
-
-        <nav class="orange lighten-3" role="navigation">
+   <body style="background-image:url('img/image3.png');">
+    <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
                 <div class="row center">
-                    <a href="index.html"><img class="logo" src="img/logo.png" alt="logo" height="42" width="82"></a>
+                    <a href="index.html"><img class="logo" src="img/image1.png" alt="logo" height="42" width="42" style="margin-top:7px;"></a>
                 </div>
             </div>
         </nav>
@@ -30,7 +29,7 @@
 
                     <br>
 
-                <h4 class="header center orange-text">Inscrivez-vous ici !</h4>
+                <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Inscrivez-vous ici !</span></h4>
 
                 <div class="row center">
                     <div style="font-size:20px">
@@ -40,7 +39,7 @@
                 </div>
 
                 <div class="row center">
-                    <h6 class="header col s12 light">Reseignez les champs ci-dessous</h6>
+                    <h6 class="header col s12 light" style="font-weight: bold; color:black">Renseignez les champs ci-dessous</h6>
                 </div>
 
 
@@ -50,7 +49,7 @@
                 <form method="post" action="#" id="monForm">
 
                     <div class="row center">
-                        <label for="nom">Nom</label>
+                        <label for="nom" style="font-weight: bold; color:black">Nom</label>
                         <div class="col s12">
                             <input type="text" name="nom" id="nom" class="validate" placeholder="Tapez votre nom ici">
                         </div>
@@ -59,7 +58,7 @@
                         <br>
 
                     <div class="row center">
-                        <label for="prenom">Prenom</label>
+                        <label for="prenom" style="font-weight: bold; color:black">Prenom</label>
                         <div class="col s12">
                             <input type="text" name="prenom" id="prenom"  class="validate" placeholder="Tapez votre prenom ici">
                         </div>
@@ -68,7 +67,7 @@
                         <br>
 
                     <div class="row center">
-                        <label for="email">E-mail</label>
+                        <label for="email" style="font-weight: bold; color:black">E-mail</label>
                         <div class="col s12">
                             <input type="text" name="email" id="email" class="validate" placeholder="Tapez votre adresse e-mail"   >
                         </div>
@@ -77,7 +76,7 @@
                         <br>
 
                     <div class="row center">
-                        <label for="mdp">Mot de Passe</label>
+                        <label for="mdp" style="font-weight: bold; color:black">Mot de Passe</label>
                         <div class="col s12">
                             <input type="password" name="mdp"  id="mdp" class="validate" placeholder="Tapez votre mot de passe ici">
                         </div>
@@ -100,8 +99,9 @@
 
                 </form>
                 <!-- Fin du Formulaire-->
-
-                <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+ <div class="row center">
+                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
+      </div>
 
 
             </div>

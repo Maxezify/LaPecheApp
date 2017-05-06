@@ -24,5 +24,8 @@
     margin-right:auto;
     margin-left:auto;
     
-    
+}
+
+body {
+  background-image: url('img/image3.png');
 }
