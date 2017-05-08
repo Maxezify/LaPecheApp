@@ -23,10 +23,7 @@
             var email = window.localStorage.getItem("email");
             var id_utili = window.localStorage.getItem("ID_utilisateurs");
 
-            if(nombre!=42)
-            {
-                document.location.href="page_connexion.html";
-            }
+
         </script>
 
     </head>
@@ -58,7 +55,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a>
+                        <a class="waves-effect" href="page_bon_plan.html"><i class="material-icons">today</i>Les bons plans</a>
                     </li>
                     <li>
                         <div class="divider">
@@ -72,29 +69,33 @@
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect" href="page_infos_perso.html">
-                            <i class="material-icons">contacts</i>
-                            Mes infos personnelles
-                        </a>
-                    </li>
-                    <li>
                         <a class="waves-effect" href="page_modif_boutique.html">
                             <i class="material-icons">settings</i>
                             Mon commerce
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect" href="#!">
-                            <i class="material-icons">supervisor_account</i>
+                        <a class="waves-effect" href="page_infos_perso.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="page_chat.html">
+                            <i class="material-icons">chat</i>
                             Chat
                         </a>
                     </li>
+
                     <li>
                         <a class="waves-effect" href="deconnexion.html">
-                            <i class="material-icons">power_settings_new</i>
+                            <i class="material-icons"><img src="img/out.png" width="24px" height="24px" /></i>
                             Déconnexion
                         </a>
                     </li>
+
+
                 </ul>
                 <a href="#" data-activates="slide-out" class="button-collapse">
                     <i class="material-icons">menu</i>
@@ -107,31 +108,55 @@
 
             <div class="container">
 
-                <h4 class="header center orange-text">Telecharger</h4>
+                <h4 class="header center orange-text">Bons Plans</h4>
 
-
-                <form id="uploadimage" action="cible_upload.php" method="post" enctype="multipart/form-data">
-
-
-                    <div class="col s12">
-                        <div class="row center">
-                            <input type="file" name="file" id="file" required />           
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="i">
+                            <p>Bon plan en cours</p>
+                            <table>
+                                <tbody id="bon_plan_en_cours"></tbody> 
+                            </table>
+                        
                         </div>
                     </div>
+                </div>
 
-                    <div class="col s12">
-                        <div class="row center">
-                            <input id="sub" type="submit" value="Upload" class="submit" />          
-                        </div>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <p>Anciens bons plans</p>
+                        
+                        <table>
+                                <tbody id="anciens_bon_plans"></tbody> 
+                        </table>
+                      
                     </div>
+                </div>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <a href="page_ajouter_bon_plan.html">
+                            <p>Ajouter un bon plan</p>
+                        </a>
+                    </div>
+                </div>
+
+               
+                                 
+                            
+                          
 
             
-                    
-                </form>
+                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
 
+
+
+
+
+            </div>  
 
         </div>
-    </div>
 
 
 
@@ -140,6 +165,7 @@
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
+
         <script type="text/javascript">
 
        
@@ -147,70 +173,54 @@
         //ajout de certains élément dans le DOM
             //Prenom et Email de l'utilisateur connecté
             document.getElementById('prenom').innerHTML = prenom;
-            document.getElementById('email').innerHTML = email;  
+            document.getElementById('email').innerHTML = email; 
 
-            //Nombre de peche de l'utilisateur connecté
+        //Recuperation des infos concernant les bons plans (en cours et ancien)
 
-           /* $(function () {
+            $.post('cible_infos_bon_plan.php', {}, function (data) {
 
-                $("#monForm").submit(function () {
-
-                    $("#loader").show(); //gif
-
-                    //.val() recuperation de valeur entré dans le formulaire
-                    fichier = $(this).find("input[name=mon_fichier]").val();
-
-                   
-                    
-
-                    $.post('cible_upload.php', {
-                        fichier: fichier
-
-                    }, function (data) {
-                        $("#loader").hide();
                         alert(data);
+
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //alert(obj);
                         
-                    })
+                        for (var i = 1; i <=obj[0]; i++) 
+                        {   
+                            if(obj[i].Status=='En cours')
+                            {
+                                $("#bon_plan_en_cours").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                            }
+                            else if(obj[i].Status=='Ancien')
+                            {
+                                $("#anciens_bon_plans").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                            }
 
-                    return false;
 
-                });
+                            
+                        }
+                        
+                    });
 
-            });*/
+                //Actualise le status des bon plan en fonction de la date du jour
+                $.post('cible_actualiser_bon_plan.php', {}, function (data) {
 
-            $(function () {
-
-                $("#uploadimage").submit(function (e) {
-                    e.preventDefault();
-                    //$("#loader").show(); //gif
-
-                    //.val() recuperation de valeur entré dans le formulaire
-                    fichier = $(this).find("input[name=file]").val();
-
-                    $.post('cible_upload.php', {
-                        file: fichier
-
-                    }, function (data) {
-                       // $("#loader").hide();
                         alert(data);
 
-                    })
-
-                    return false;
-
-                });
-                });
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //alert(obj);
+                        
+                    });            
             
 
 
 
+            //---------------------------------------------------------- 
 
-
-
-           
+         
 
         </script>
-     
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
     <head>
 
@@ -32,7 +32,7 @@
 
     </head>
 
-    <body>
+    <body style="background-image:url('img/image3.png');">
 
         <!--<nav class="orange lighten-3" role="navigation">
             <div class="nav-wrapper container">
@@ -83,56 +83,38 @@
         <div class="section no-pad-bot" id="index-banner">
 
             <div class="container">
-
-                <h4 class="header center orange-text">Vous vous etes connecté correctement !</h4>
-
-                <!-- Div contenant le prenom de la personne connecté -->
-                <div class="col s12">
-                    <div class="row center">
-                        <div id="prenom2">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Div contenant le nombre de peche-->
-                <div class="col s12">
-                    <div class="row center">
-                        <div id="nombre_peche">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Div contenant les bons plans en cours -->
-                <div class="col s12">
-                    <div class="row center">
-                        <div id="i">
-                            <p>Mon bon plan actuel</p>
-                            <table>
-                                <tbody id="bon_plan_en_cours"></tbody> 
-                            </table>
-                        
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Div contenant les notifications-->
-                <div class="col s12">
-                    <div class="row center">
-                        <div id="o">
-                            <p>Notifications</p>
-                            <table>
-                                <tbody id="notifs"></tbody> 
-                            </table>
-                        
-                        </div>
-                    </div>
-                </div>
-
-
-
             
-        </div>
+                <div class="row center">
+                <!--  contenant le prenom de la personne connecté -->
+                  <span id="prenom2" class="grey-text text-darken-1" style="font-weight: bold; font-size: 25px;"></span>
 
+                    <div class="row">
+                        <!-- Div contenant le nombre de peche-->
+                        <span class="header col s12 light" style="font-size: 17px;">Votre solde est de:</span>
+                        <span id="nombre_peche" class="green-text lighten-1" style="font-weight: bold; font-size: 35px;"></span>
+                            <br>
+                            <br>
+                        <!-- Div contenant les bons plans en cours -->
+                        <div class="row" style="background-color:#ffa726;">
+                            <span class="white-text" style="font-size: 25px; font-weight: bold;">Mes Bons Plans Actuels</span>
+                        </div>
+                            <table>
+                                <span id="bon_plan_en_cours" class="grey-text text-darken-1" style="font-size: 20px; font-weight: bold;"></span>
+                            </table>
+                            <br>
+                            <br>
+                        <!-- Div contenant les notifications-->
+                        <div class="row" style="background-color:#ffa726;">
+                            <span class="white-text" style="font-size: 25px; font-weight: bold;">Notifications</span>
+                        </div>
+                            <table>
+                                <span id="notifs" class="grey-text text-darken-1" style="font-size: 20px; font-weight: bold;"></span>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -158,7 +140,7 @@
             var text = data;
             var obj = JSON.parse(text);
             
-            document.getElementById('nombre_peche').innerHTML = 'Votre solde est de '+obj.Nombre_peche+ ' Pêches';}); 
+            document.getElementById('nombre_peche').innerHTML = obj.Nombre_peche+ ' Pêches';}); 
             //-------------------------------------------------------------------------------
 
             //Recuperation des infos concernant les bons plans (juste les bon plan en cours)
