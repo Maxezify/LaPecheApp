@@ -32,12 +32,11 @@
     </head>
 
 
-    <body>
+    <body style="background-image:url('img/image3.png');">
 
-        <nav class="orange lighten-3" role="navigation">
+        <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
-
-                <img class="brand-logo" src="img/logo.png" alt="logo" height="42" width="82">
+                <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
 
                 <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
                 <ul id="slide-out" class="side-nav">
@@ -124,8 +123,26 @@ h1 {
     text-align: center;
     text-shadow: 1px 1px 0 #fff, 2px 2px 0 #bbb;
 }
+    
+    h3 {
+        
+  
+      font-size:20px;
+        font-weight: bold;
+        color:#66bb6a;
+
+    }
+    
+    p {
+        
+              font-size:10px;
+        font-weight: bold;
+        color:black;
+        
+    }
+    
 hr {
-    border-top: 1px solid #ccc;
+    border-top: 2px solid #ccc;
     border-bottom: 1px solid #fff;
     margin: 25px 0;
     clear: both;
@@ -152,8 +169,6 @@ ul.grid-nav li {
 }
 ul.grid-nav li a {
     display: inline-block;
-    background: #999;
-    color: #fff;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 4px;
@@ -177,7 +192,7 @@ ul.rig {
 }
 ul.rig li {
     display: inline-block;
-    padding: 10px;
+    padding: 15px;
     margin: 0 0 2.5% 2.5%;
     background: #fff;
     border: 1px solid #ddd;
@@ -200,7 +215,8 @@ ul.rig li h3 {
 ul.rig li p {
     font-size: .9em;
     line-height: 1.5em;
-    color: #999;
+    color: black;
+
 }
 /* class for 2 columns */
 ul.rig.columns-2 li {
@@ -234,10 +250,9 @@ ul.rig.columns-2 li {
 </style>
 
 <div class="wrapper">
-    <div class="container">
-        <h1>Liste des commerces</h1>
-        
-        <hr />
+    <div class="row center">
+        <h5 class="green-text lighten-1" style="font-weight: bold; font-size:26px;">Liste des commerces</h5>
+        <br>
         
         <div id="two-columns" class="grid-container" style="display:block;">
             <ul class="rig columns-2">
@@ -257,13 +272,15 @@ ul.rig.columns-2 li {
 
                 <div class="col s12">
                     <div class="row center">
-                        <a href="page_paiement.html">Vers Paiement</a>            
+                       <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="page_paiement.html">Vers Paiement</a></div>             
                     </div>
                 </div>
 
 
 
-                <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+              <div class="row center">
+                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
+      </div>
 
 
 
