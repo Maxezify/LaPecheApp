@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            
+
+            var email = window.localStorage.getItem("email");
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+    <body>
+
+        <!--<nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+                <div class="row center">
+                    <img class="logo" src="img/logo.png" alt="logo" height="42" width="82">
+                </div>
+            </div>
+        </nav> -->
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+
+                <img class="brand-logo" src="img/logo.png" alt="logo" height="42" width="82">
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                              <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                <li><a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a></li>
+                <li><div class="divider"></div></li>
+                <li>
+                    <a class="waves-effect" href="page_liste_commerce.html">
+                        <i class="material-icons">store</i>
+                        Les commerçants
+                    </a>
+                </li>
+                <li><a class="waves-effect" href="#!"><i class="material-icons">contacts</i>Mes infos personnelles</a></li>
+                <li><a class="waves-effect" href="#!"><i class="material-icons">settings</i>Mon commerce</a></li>
+                <li><a class="waves-effect" href="#!"><i class="material-icons">supervisor_account</i>Chat</a></li>
+                <li>
+                    <a class="waves-effect" href="deconnexion.html">
+                        <i class="material-icons">power_settings_new</i>
+                        Déconnexion
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+      </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                <h4 class="header center orange-text">Vous vous etes connecté correctement !</h4>
+
+                <!-- Div contenant le prenom de la personne connecté -->
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="prenom2">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Div contenant le nombre de peche-->
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="nombre_peche">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Div contenant les bons plans en cours -->
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="i">
+                            <p>Mon bon plan actuel</p>
+                            <table>
+                                <tbody id="bon_plan_en_cours"></tbody> 
+                            </table>
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Div contenant les notifications-->
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="o">
+                            <p>Notifications</p>
+                            <table>
+                                <tbody id="notifs"></tbody> 
+                            </table>
+                        
+                        </div>
+                    </div>
+                </div>
+
+
+
+            
+        </div>
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+
+       
+
+        //ajout de certains élément dans le DOM
+
+            //Prenom et Email de l'utilisateur connecté ------------------------------------
+            $("#prenom2").append('Bienvenue '+ prenom);
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
+
+            //Nombre de peche de l'utilisateur connecté
+            $.post('cible_infos_peche.php',{}, function (data) {
+            //$("#loader").hide();
+            var text = data;
+            var obj = JSON.parse(text);
+            
+            document.getElementById('nombre_peche').innerHTML = 'Votre solde est de '+obj.Nombre_peche+ ' Pêches';}); 
+            //-------------------------------------------------------------------------------
+
+            //Recuperation des infos concernant les bons plans (juste les bon plan en cours)
+            $.post('cible_infos_bon_plan.php', {}, function (data) {
+
+                alert(data);
+
+                var text = data;
+                var obj = JSON.parse(text);
+                //alert(obj);
+                
+                for (var i = 1; i <=obj[0]; i++) 
+                {   
+                    if(obj[i].Status=='En cours')
+                    {
+                        $("#bon_plan_en_cours").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                    }
+
+                }
+                
+            });
+            //-----------------------------------------------------------------------------------
+
+            //Recuperations des notifs
+
+            $.post('cible_notifications.php', {}, function (data) {
+
+                alert(data);
+
+                var text = data;
+                var obj = JSON.parse(text);
+                //alert(obj);
+
+                for (var i = 1; i <=obj[0]; i++) 
+                {  
+                    $("#notifs").append('<tr><td>'+'Virement de '+obj[i].Paiement_peche+' Pêches de '+obj[i].Nom_personne_debite+'</td></tr>');
+                }
+                
+
+                
+            });
+            //-----------------------------------------------------------------------------------            
+
+
+
+
+
+
+           
+
+        </script>
+
+
+
+    </body>
+
+</html>

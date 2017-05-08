@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var email = window.localStorage.getItem("email");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+
+
+    </head>
+
+    <body>
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+
+                <img class="brand-logo" src="img/logo.png" alt="logo" height="42" width="82">
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_perso.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!">
+                            <i class="material-icons">supervisor_account</i>
+                            Chat
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons">power_settings_new</i>
+                            Déconnexion
+                        </a>
+                    </li>
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+            </div>
+      </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+
+                <h4 class="header center orange-text">Paiement</h4>
+
+                <div class="row center">
+                    <h6 class="header col s12 light">Pour effectuer votre achat, veuillez indiquez le nom du magasin ainsi que le montant de la transaction adéquate.</h6>
+                </div>
+
+
+
+                <div class="row center">
+                    <h6 class="header col s12 light">Votre Solde actuel : </h6> 
+                </div>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="nombre_peche">
+                        </div>
+                    </div>
+                </div>
+              
+                        <br/>
+                        <br/> 
+
+
+
+                <!-- Début du Formulaire-->
+                <form method="post" action="#" id="monForm">
+
+                    <div class="row center">                                          
+                        <div class="col s12">
+                            <label for="paiement_nom_commerce">Nom du commerce</label>
+                            <input type="text" name="paiement_nom_commerce" id="paiement_nom_commerce"  class="validate" placeholder="Tapez le nom du commerce">
+                        </div>
+                    </div>
+
+                        <br/>
+
+                    <div class="row center">
+                        <label for="montant">Montant</label>
+                        <div class="col s12">
+                            <input type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
+                        </div>
+                    </div>
+
+                        <br/>
+
+                    <div class="row center">
+                        <div class="col s12">
+                            <div class="btn-large waves-effect waves-light orange">
+                                <input type="submit" id="payer" value="Payer" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gif du chargement qui s'active lors du click -->
+                    <div class="row center">
+                      <div id="loader" style="display: none">
+                          <img src="img/ajax-loader.gif" alt="loader" />
+                      </div>
+                    </div>
+
+                </form>
+                <!-- Fin du Formulaire-->
+
+                <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+
+                 
+                    
+
+            </div>
+        </div>
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        
+
+        <script type="text/javascript">
+        //ajout de certains élément dans le DOM------------------------------------
+            //Prenom et Email de l'utilisateur connecté
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
+
+        
+        //Nombre de peche de l'utilisateur connecté ------------------------------------------
+            $.post('cible_infos_peche.php',{}, function (data) {
+            //$("#loader").hide();
+            var text = data;
+            var obj = JSON.parse(text);
+
+            window.localStorage.setItem("solde", obj.Nombre_peche);         
+            
+            document.getElementById('nombre_peche').innerHTML = obj.Nombre_peche+ ' Pêches';}); 
+
+        //-------------------------------------------------------------------------------------
+
+        //Liste déroulante des commerce enregistré dans la bdd --------------------------------
+        /*Pour fonctionner, ce widget doit prend un paramètre obligatoire, celui-ci nécessite d'utiliser une option indiquant la liste des propositions à afficher. Ce paramètre se nomme source, et prend en valeur un tableau contenant chaque suggestion
+        cf openclassroom */
+
+          $('#paiement_nom_commerce').autocomplete({
+              source : 'cible_paiement1_autocompletion.php',
+              focus: function (event, ui) {
+                $(".ui-helper-hidden-accessible").hide();
+                event.preventDefault();
+            }
+
+          });
+           
+        //-------------------------------------------------------------------------------------
+
+        //Modification du solde Peche pour l'utilisateur et le commercant de la boutique apres avoir payé sur le bouton Payer
+        /*function Confirmer(){
+          if (confirm("Etes vous sûr d'avoir correctement rempli les champs précédents ?")) 
+          {*/
+
+           $(function () {
+                $("#monForm").submit(function () {
+
+                    $("#loader").show(); //gif
+
+                    //.val() recuperation de valeur entré dans le formulaire
+                    nom_commerce = $(this).find("input[name=paiement_nom_commerce]").val();
+                    montant = $(this).find("input[name=montant]").val();
+                    var solde = window.localStorage.getItem("solde");
+                    var prenom = window.localStorage.getItem("prenom");
+                    var nom = window.localStorage.getItem("nom");
+
+                    $.post('cible_paiement2_modif_solde.php', {
+                        nom_commerce: nom_commerce,
+                        montant: montant,
+                        solde: solde,
+                        prenom: prenom,
+                        nom: nom
+                    }, function (data) {
+                        $("#loader").hide();
+                        alert(data);
+                        window.location.reload();
+
+                        
+                    })
+
+                    return false;
+
+                });
+
+            });
+
+
+        
+
+
+        </script>
+
+    </body>
+
+</html>

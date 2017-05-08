@@ -4,7 +4,7 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>HelloCordova</name>
+    <name>La Pêche</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -12,6 +12,7 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
+    <icon density="mdpi" height="60" src="www/img/image1.png" width="60" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

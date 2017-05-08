@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var email = window.localStorage.getItem("email");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+
+    <body>
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+
+                <img class="brand-logo" src="img/logo.png" alt="logo" height="42" width="82">
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_perso.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!">
+                            <i class="material-icons">supervisor_account</i>
+                            Chat
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons">power_settings_new</i>
+                            Déconnexion
+                        </a>
+                    </li>
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+            </div>
+      </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                <h4 class="header center orange-text">Nouveau bon plan</h4>
+
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="nom_boutique">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Début du Formulaire-->
+                <form method="post" action="#" id="monForm">
+
+
+                    <p>Description : </p>
+              
+                    
+                 
+                        <div class="container">
+                            <textarea name="description" id="description"  class="validate" placeholder="Tapez une description du bon plan"></textarea> 
+                        </div>
+                   
+                         <p>Durée :</p>
+                         <div class="container">
+                             <table>
+                                 <tr>
+                                    <td>Du :</td>
+                                    <td><input id="datefield" type="date" name="date_debut"  min="2000-13-13" required></td>
+                                    <td><img src="img/date2.png" /></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Au :</td>
+                                    <td><input id="datefield2" type="date" name="date_fin" min="date_debut" required></td>
+                                    <td><img src="img/date2.png"></td>
+                                </tr>
+                             </table>
+                         </div>
+
+                    <div class="row center">
+                        <div class="col s12">
+                            <div class="btn-large waves-effect waves-light orange">
+                                <input type="submit" id="bon_plan" value="Créer" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gif du chargement qui s'active lors du click-->
+                    <div class="row center">
+                        <div id="loader" style="display: none">
+                            <img src="img/ajax-loader.gif" alt="loader" />
+                        </div>
+                    </div>
+
+
+               <br>           
+
+            
+                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+
+
+                 </form>
+
+
+            </div>  
+
+        </div>
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+
+       
+
+        //ajout de certains élément dans le DOM
+            //Prenom et Email de l'utilisateur connecté
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
+            
+        //Date Range (Durée )--------------------------------------------------------
+
+        //2017-04-23
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+         if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("datefield").setAttribute("min", today);
+        document.getElementById("datefield2").setAttribute("min", today);
+
+
+            /*var Date_jour = new Date();
+            var date = Date_jour.getFullYear()+ '-' + Date_jour.getMonth()+ '-' +Date_jour.getDate();
+
+
+            $("#date").append(date);*/
+
+        //------------------------------------------------
+
+        //Recuperation des infos de la boutique
+            $.post('cible_infos_boutique.php', {
+                    id: id_utili
+
+                    }, function (data) {
+
+                        //alert(data);
+
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //ajout des infos de la boutique  dans le DOM 
+                        document.getElementById('nom_boutique').innerHTML = obj.Nom_boutique; 
+
+                        //ID du commerce
+                         window.localStorage.setItem("id_commerce", obj.ID_commercant);
+                         var id_commerce = window.localStorage.getItem("id_commerce");
+                         alert(id_commerce);
+                 
+                        
+  
+                    });
+
+            //----------------------------------------------------------
+
+            $(function () {
+
+                $("#monForm").submit(function () {
+
+                    $("#loader").show(); //gif
+
+                     var id_commerce = window.localStorage.getItem("id_commerce");
+
+                    //.val() recuperation de valeur entré dans le formulaire
+                    description = $(this).find("textarea[name=description]").val();
+                    date_debut = $(this).find("input[name=date_debut]").val(); 
+                    date_fin = $(this).find("input[name=date_fin]").val();
+                   
+                    
+
+                    $.post('cible_ajouter_bon_plan.php', {
+                        description: description,
+                        date_debut: date_debut,
+                        date_fin: date_fin,
+                        id: id_utili,
+                        id_commerce: id_commerce
+
+                    }, function (data) {
+                        $("#loader").hide();
+                        alert(data);
+                    })
+
+                    return false;
+
+                });
+
+            });
+
+         
+
+        </script>
+
+
+
+    </body>
+
+</html>
