@@ -42,40 +42,76 @@
             </div>
         </nav> -->
 
-        <nav class="orange lighten-1" role="navigation">
+            <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
+
                 <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
+
                 <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
                 <ul id="slide-out" class="side-nav">
                     <li>
                         <div class="userView">
                             <div class="background">
-                              <img src="img/fond.jpg">
+                                <img src="img/fond.jpg">
                             </div>
                             <img class="circle" id="profilpic" src="img/max.jpg">
                             <span class="white-text name" id="name"><span id="prenom"></span></span>
                             <span class="white-text email" id="email"><span id="email"></span></span>
                         </div>
                     </li>
-                <li><a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a></li>
-                <li><div class="divider"></div></li>
-                <li>
-                    <a class="waves-effect" href="page_liste_commerce.html">
-                        <i class="material-icons">store</i>
-                        Les commerçants
-                    </a>
-                </li>
-                <li><a class="waves-effect" href="#!"><i class="material-icons">contacts</i>Mes infos personnelles</a></li>
-                <li><a class="waves-effect" href="#!"><i class="material-icons">settings</i>Mon commerce</a></li>
-                <li><a class="waves-effect" href="#!"><i class="material-icons">supervisor_account</i>Chat</a></li>
-                <li>
-                    <a class="waves-effect" href="deconnexion.html">
-                        <i class="material-icons">power_settings_new</i>
-                        Déconnexion
-                    </a>
-                </li>
-            </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_bon_plan.html"><i class="material-icons">today</i>Les bons plans</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_persos.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="page_tchat.html">
+                            <i class="material-icons">chat</i>
+                            Chat
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons"><img src="img/out.png" width="24px" height="24px" /></i>
+                            Déconnexion
+                        </a>
+                    </li>
+
+
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
             </div>
       </nav>
 
@@ -145,7 +181,7 @@
             //Recuperation des infos concernant les bons plans (juste les bon plan en cours)
             $.post('cible_infos_bon_plan.php', {}, function (data) {
 
-                alert(data);
+               // alert(data);
 
                 var text = data;
                 var obj = JSON.parse(text);
@@ -167,7 +203,7 @@
 
             $.post('cible_notifications.php', {}, function (data) {
 
-                alert(data);
+               // alert(data);
 
                 var text = data;
                 var obj = JSON.parse(text);
@@ -175,14 +211,42 @@
 
                 for (var i = 1; i <=obj[0]; i++) 
                 {  
-                    $("#notifs").append('<tr><td>'+'Virement de '+obj[i].Paiement_peche+' Pêches de '+obj[i].Nom_personne_debite+'</td></tr>');
+                    if(obj[i].Type=='Crédité')
+                    {
+                        $("#notifs").append('<tr><td>'+'Virement de '+obj[i].Paiement_peche+' Pêches de '+obj[i].Nom_personne_debite+'</td></tr>');
+                    }
+                    else if(obj[i].Type=='Débit')
+                    {
+                        $("#notifs").append('<tr><td>'+'Paiement de '+obj[i].Paiement_peche+' Pêches à '+obj[i].Nom_boutique_credite+'</td></tr>');
+                    }
+                    
                 }
                 
 
                 
             });
-            //-----------------------------------------------------------------------------------            
+            //-----------------------------------------------------------------------------------  
+        //Recuperation des infos de la boutique
+        
+            $.post('cible_infos_boutique.php', {
+                    id: id_utili
 
+                    }, function (data) {
+
+                        //alert(data);
+
+                        var text = data;
+                        var obj = JSON.parse(text);
+
+                        //Nom du commerce dans le local
+                        window.localStorage.setItem("nom_commerce", obj.Nom_boutique);
+                        //window.localStorage.setItem("id_commerce", obj.ID_commercant);
+                        
+                 
+                        
+  
+                    });
+        
 
 
 
