@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var email = window.localStorage.getItem("email");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+
+    <body style="background-image:url('img/image3.png');">
+
+                <nav class="orange lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+
+                <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_bon_plan.html"><i class="material-icons">today</i>Les bons plans</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_persos.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="page_tchat.html">
+                            <i class="material-icons">chat</i>
+                            Chat
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons"><img src="img/out.png" width="24px" height="24px" /></i>
+                            Déconnexion
+                        </a>
+                    </li>
+
+
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+            </div>
+      </nav>
+
+
+
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+   
+    font-family: 'Helvetica Neue', arial, sans-serif;
+    font-weight: 200;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 4em;
+    font-weight: 400;
+    margin: 0 0 20px;
+    text-align: center;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #bbb;
+}
+    
+    h3 {
+        
+  
+      font-size:20px;
+        font-weight: bold;
+        color:#66bb6a;
+
+    }
+    
+    p {
+        
+              font-size:10px;
+        font-weight: bold;
+        color:black;
+        
+    }
+    
+hr {
+    border-top: 2px solid #ccc;
+    border-bottom: 1px solid #fff;
+    margin: 25px 0;
+    clear: both;
+}
+.centered {
+    text-align: center;
+}
+.wrapper {
+    width: 100%;
+    padding: 30px 0;
+}
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+ul.grid-nav {
+    list-style: none;
+    font-size: .85em;
+    font-weight: 200;
+    text-align: center;
+}
+ul.grid-nav li {
+    display: inline-block;
+}
+ul.grid-nav li a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+ul.grid-nav li a:hover {
+    background: #7b0;
+}
+ul.grid-nav li a.active {
+    background: #333;
+}
+.grid-container {
+    display: none;
+}
+/* ----- Image grids ----- */
+ul.rig {
+    list-style: none;
+    font-size: 0px;
+    margin-left: -2.5%; /* should match li left margin */
+}
+ul.rig li {
+    display: inline-block;
+    padding: 15px;
+    margin: 0 0 2.5% 2.5%;
+    background: #fff;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    font-size: 1rem;
+    vertical-align: top;
+    box-shadow: 0 0 5px #ddd;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+ul.rig li img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 10px;
+}
+ul.rig li h3 {
+    margin: 0 0 5px;
+}
+ul.rig li p {
+    font-size: .9em;
+    line-height: 1.5em;
+    color: black;
+
+}
+/* class for 2 columns */
+ul.rig.columns-2 li {
+    width: 47.5%; /* this value + 2.5 should = 50% */
+}
+
+
+@media (max-width: 800px) {
+    .container {
+        width: auto;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    ul.grid-nav li {
+        display: block;
+        margin: 0 0 5px;
+    }
+    ul.grid-nav li a {
+        display: block;
+    }
+    ul.rig {
+        margin-left: 0;
+    }
+    ul.rig li {
+        width: 100% !important; /* over-ride all li styles */
+        margin: 0 0 20px;
+    }
+}
+</style>
+
+<div class="wrapper">
+    <div class="row center">
+        <h5 class="green-text lighten-1" style="font-weight: bold; font-size:26px;">Liste des commerces</h5>
+        <br>
+        <div class="col s12">
+            <div class="row center">
+               <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="page_paiement.html">Vers Paiement</a></div>             
+            </div>
+        </div>
+        <div id="two-columns" class="grid-container" style="display:block;">
+            <ul class="rig columns-2">
+                <span id="infos">
+                
+                </span>
+            </ul>
+        </div>
+        <div id="two-columns" class="grid-container" style="display:block;">
+            <ul class="rig columns-2">
+                <p id="demo">
+                
+                </p>
+            </ul>
+        </div>
+
+
+
+<!--
+  Début du Formulaire
+                <form method="post" action="#" id="monForm">
+                    <div class="row center">                                          
+                        <div class="col s12">
+                            <label for="liste_commerce" style="font-weight: bold; color:black">Nom du commerce</label>
+                            <input type="text" name="recherche" id="recherche" placeholder="Tapez le nom du commerce">
+                        </div>
+                    </div>
+ </form>
+         <div id="two-columns" class="grid-container" style="display:block;">
+            <ul class="rig columns-2">
+                <span id="infos2">
+                
+                </span>
+            </ul>
+        </div>
+
+        -->
+
+
+    </div>
+</div>
+
+
+
+         
+
+
+
+
+
+
+
+              <div class="row center">
+                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
+      </div>
+
+
+
+
+
+            </div>  
+
+        </div>
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript">
+
+       
+
+        //ajout de certains élément dans le DOM
+            //Prenom et Email de l'utilisateur connecté
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
+
+            //Nombre de peche de l'utilisateur connecté
+            $.post('cible_liste_commerce.php',{}, function (data) {
+            //$("#loader").hide();
+            alert(data);
+
+            var text = data;
+            var obj = JSON.parse(text);
+           
+
+            //$("#liste_commerce").html('<table><tr><td>Nom boutique</td><td>Description</td><td>Adresse</td><td>Ville</td><td>Horaire</td></tr></table>');
+
+            for (var i = 1; i <=obj[0]; i++) 
+            {
+                //alert(obj[i].Nom_boutique);
+                //document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
+                //var boutique = document.createElement('div');
+               /* document.getElementById('nom_boutique').innerHTML = obj[i].Nom_boutique;
+                document.getElementById('description').innerHTML = obj[i].Description;
+                document.getElementById('adresse').innerHTML = obj[i].Ville;
+                document.getElementById('ville').innerHTML = obj[i].Adresse;
+                document.getElementById('horaire').innerHTML = obj[i].Horaire;*/
+
+                $("#infos").append('<li><h3><span value="'+obj[i].Nom_boutique+'" onclick="myF()">'+obj[i].Nom_boutique+'</span></h3><p>'+obj[i].Description+'</p></li>');
+
+
+
+                
+            }
+            
+            
+
+        });
+/*$(document).ready(function(){
+    $("span").click(function(){
+        alert($("span").attr("class"));
+    });
+});
+*/
+$(document).ready(function(){
+function myF() {
+     $(this).attr('value');
+
+    
+}
+});
+
+
+
+
+    //Liste déroulante des commerce enregistré dans la bdd --------------------------------
+        /*Pour fonctionner, ce widget doit prend un paramètre obligatoire, celui-ci nécessite d'utiliser une option indiquant la liste des propositions à afficher. Ce paramètre se nomme source, et prend en valeur un tableau contenant chaque suggestion
+        cf openclassroom */
+
+/*$('#recherche').autocomplete({
+
+    source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
+
+        $.ajax({
+
+            url : 'cible_auto_liste.php', // on appelle le script JSON
+
+            dataType : 'json', // on spécifie bien que le type de données est en JSON
+
+            data: requete,
+
+            success : function(data){
+
+                reponse($.map(data, function (item) {
+                    item.set = data[item.set];
+                    console.log(item);
+                    //document.getElementById('infos2').innerHTML ='<li><h3>'+ item+'</h3></li>'; 
+                    $("#infos2").append('<li><h3>'+item+'</h3></li>');
+                    return item;
+
+                }));
+                //document.getElementById('infos2').innerHTML =''; 
+
+
+            }
+            
+
+
+});
+    }});*/
+
+
+           
+        //-------------------------------------------------------------------------------------
+
+            // 
+
+            
+
+
+
+
+
+
+           
+
+        </script>
+     
+
+
+
+    </body>
+
+</html>

@@ -24,8 +24,41 @@
     margin-right:auto;
     margin-left:auto;
     
+    
+}
+#conteneur
+
+{
+
+    display: flex;
+
+}
+.element
+{
+    background-color: red;
+    border: 1px solid blue;
 }
 
-body {
-  background-image: url('img/image3.png');
+#liste
+{
+    
+     display: flex;
+     flex-direction: column;
+}
+
+
+#banniere_image
+{
+
+}
+
+#banniere_description
+{
+
+
+    
+}
+.image {
+  max-width: 100%;
+    height: auto;
 }

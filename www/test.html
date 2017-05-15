@@ -1,25 +1,231 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Capture Photo</title>
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<html lang="en">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var email = window.localStorage.getItem("email");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+
+    <body style="background-image:url('img/image3.png');">
+
+        <nav class="orange lighten-3" role="navigation">
+            <div class="nav-wrapper container">
+
+                <img class="brand-logo" src="img/logo.png" alt="logo" height="42" width="82">
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!"><i class="material-icons">today</i>Les évènements</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_perso.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#!">
+                            <i class="material-icons">supervisor_account</i>
+                            Chat
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons">power_settings_new</i>
+                            Déconnexion
+                        </a>
+                    </li>
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+            </div>
+      </nav>
+
+
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                <h4 class="header center orange-text">Telecharger</h4>
+
+
+      			<form id="uploadimage" action="cible_upload.php" method="post" enctype="multipart/form-data">
+
+
+      				<div class="col s12">
+                    	<div class="row center">
+                       		<input type="file" name="file" id="file" required />           
+                    	</div>
+                	</div>
+                	<div class="col s12">
+                    	<div class="row center">
+                       		<div id='image_preview' ></div>          
+                    	</div>
+                	</div>
+
+                	<div class="col s12">
+                    	<div class="row center">
+                       		<input  type="button" value="button"  />          
+                    	</div>
+                	</div>
+
+                	<div class="col s12">
+                    	<div class="row center">
+                       		<input id="sub" type="submit" value="Upload" class="submit" />          
+                    	</div>
+                	</div>
+
+			
+					
+				</form>
+
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+        <script type="text/javascript">
+
+       
+
+        //ajout de certains élément dans le DOM
+            //Prenom et Email de l'utilisateur connecté
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
+
+
+$(function () {
+            $("#uploadimage").on('submit',(function(e) {
+				e.preventDefault();
+				$.ajax({
+					url: "cible_upload.php",
+					type: "POST",
+					data: new FormData(this),
+					contentType: false,
+					cache: false, 
+					processData: false,
+					success: function (data) {
+                		alert(data);
+            }
+				});
+			}));
+
+			
+    // A chaque sélection de fichier
+    $('#uploadimage').find('input[name="file"]').on('change', function (e) {
+        var files = $(this)[0].files;
  
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-
-  </head>
-  <body>
-
-<input type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
-
-<script type="text/javascript">
-$(function() {
-    $('input[name="daterange"]').daterangepicker();
+        if (files.length > 0) {
+            // On part du principe qu'il n'y qu'un seul fichier
+            // étant donné que l'on a pas renseigné l'attribut "multiple"
+            var file = files[0],
+                $image_preview = $('#image_preview');
+ 
+            // Ici on injecte les informations recoltées sur le fichier pour l'utilisateur
+            $image_preview.find('.thumbnail').removeClass('hidden');
+            $image_preview.find('img').attr('src', window.URL.createObjectURL(file));
+            $image_preview.find('h4').html(file.name);
+            $image_preview.find('.caption p:first').html(file.size +' bytes');
+        }
+    });
+ 
+    // Bouton "Annuler" pour vider le champ d'upload
+    $('#image_preview').find('button[type="button"]').on('click', function (e) {
+        e.preventDefault();
+ 
+        $('#uploadimage').find('input[name="image"]').val('');
+        $('#image_preview').find('.thumbnail').addClass('hidden');
+    });
 });
-</script>
 
-  </body>
+
+
+        </script>
+
+
+
+
+     
+
+
+
+    </body>
+
 </html>

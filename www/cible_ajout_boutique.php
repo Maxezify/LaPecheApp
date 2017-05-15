@@ -11,7 +11,7 @@
 	}
 	
 
-	echo $_POST['nom_boutique'];
+	/*echo $_POST['nom_boutique'];
 	echo '<pre>';
 	echo $_POST['description'];
 	echo '<pre>';
@@ -21,7 +21,7 @@
 	echo '<pre>';
 	echo $_POST['horaire'];
 	echo '<pre>';
-	echo $_POST['id'];
+	echo $_POST['id'];*/
 
 
 	if(!empty($_POST['nom_boutique']) AND !empty($_POST['description']) AND !empty($_POST['adresse']) AND !empty($_POST['ville']) AND !empty($_POST['horaire']))
@@ -37,7 +37,7 @@
 				'horaire'=>$_POST['horaire'],
 				'ID_utilisateurs'=>$_POST['id']));
 			
-		echo '<p>Modif reussi ! </br> </p>';
+		echo '<p>Ajout du commerce réussi ! </br> </p>';
 	}
 	else
 	{

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
     <head>
 
@@ -32,7 +32,7 @@
 
     </head>
 
-    <body>
+    <body style="background-image:url('img/image3.png');">
 
         <!--<nav class="orange lighten-3" role="navigation">
             <div class="nav-wrapper container">
@@ -164,7 +164,7 @@
             //Recuperation des infos concernant les bons plans (juste les bon plan en cours)
             $.post('cible_infos_bon_plan.php', {}, function (data) {
 
-                alert(data);
+                //alert(data);
 
                 var text = data;
                 var obj = JSON.parse(text);
@@ -186,7 +186,7 @@
 
             $.post('cible_notifications.php', {}, function (data) {
 
-                alert(data);
+                //alert(data);
 
                 var text = data;
                 var obj = JSON.parse(text);

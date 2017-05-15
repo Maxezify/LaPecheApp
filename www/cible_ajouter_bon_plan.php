@@ -49,6 +49,7 @@
 					'ID_commercant'=>$_POST['id_commerce']));
 				
 			echo '<p>Le Bon plan a été créé ! </br> </p>';
+			
 		}
 		else
 		{

@@ -29,11 +29,12 @@
 
                     <br>
 
-                <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Inscrivez-vous ici !</span></h4>
+                <h4 class="header center orange-text"><span  id="statut_inscription" class="green-text lighten-1" style="font-weight: bold;">Inscrivez-vous ici !</span></h4>
 
                 <div class="row center">
                     <div style="font-size:20px">
-                        <div id="statut_inscription">
+                        <div id="connexion">
+
                         </div>
                     </div>
                 </div>
@@ -130,20 +131,27 @@
                         mdp: mdp
                     }, function (data) {
                         $("#loader").hide();
-                        alert(data);
+                        //alert(data);
 
                         //ajout du statut de l'inscription (reussi ou non) dans le DOM
                         if(data=='Vous vous êtes inscrit correctement !')
                         {   
                             document.getElementById('statut_inscription').innerHTML = 'Inscription Réussie !'; 
+                             $("#connexion").append('<a href="page_connexion.html">Connectez-vous</a>');
+                            //Retour Haut de page 
+                            window.scrollTo(0, 0);
                         }
                         else if(data=='Vous n\'avez pas rempli tous les champs, recommencez !')
                         {
                             document.getElementById('statut_inscription').innerHTML = 'Vous n\'avez pas rempli tous les champs, recommencez.'; 
+                            //Retour Haut de page 
+                            window.scrollTo(0, 0);
                         }
                         else if(data=='Email déjà utilisé.')
                         {
-                            document.getElementById('statut_inscription').innerHTML = 'Cette email est déjà utilisé, choissisez-en une autre.'
+                            document.getElementById('statut_inscription').innerHTML = 'Cette email est déjà utilisé, choissisez-en une autre.';
+                            //Retour Haut de page 
+                            window.scrollTo(0, 0);
                         }
                     })
 

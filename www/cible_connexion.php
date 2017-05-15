@@ -50,6 +50,26 @@
 			$identifiant['ID_utilisateurs'] = $resultat['ID_utilisateurs'];
 			$identifiant['nombre'] = 42;
 
+
+			// Verification que la personne n'a pas de boutique pour que lors de la première connexion, il soit redirigé vers la page création boutique
+			$lecture2=$bdd ->prepare('SELECT ID_commercant, Nom_boutique, Description, Adresse, Ville, Horaire
+								 FROM commercant 
+								 WHERE ID_utilisateurs = :ID_utilisateurs');
+
+			$lecture2->execute(array('ID_utilisateurs' => $_SESSION['ID']));	
+
+			if($resultat2 = $lecture2->fetch())
+			{
+				$rien = 1;
+			}
+			else
+			{
+				$rien = 0;
+			}
+			
+			$identifiant['rien'] = $rien;
+
+
 			sleep(1);
 			echo json_encode($identifiant);
 			

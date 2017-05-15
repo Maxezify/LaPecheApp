@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+    <title>Le tchat en AJAX !</title>
+
+    </head>
+
+    
+
+    <body>
+
+        <div id="messages">
+
+            <!-- les messages du tchat -->
+
+        </div>
+
+
+    <form method="POST" action="#" id="monForm">
+
+        Pseudo : <input type="text" name="pseudo" id="pseudo" /><br />
+
+        Message : <textarea name="message" id="message"></textarea><br />
+
+        <input type="submit" name="submit" value="Envoyez votre message !" id="envoi" />
+
+    </form>
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+    <script type="text/javascript">
+
+    /*$('#envoi').click(function(e){
+
+        e.preventDefault(); // on empêche le bouton d'envoyer le formulaire
+
+        // on sécurise les données
+        var pseudo = encodeURIComponent( $('#pseudo').val() ); 
+        var message = encodeURIComponent( $('#message').val() );
+
+
+        if(pseudo != "" && message != "")
+        { // on vérifie que les variables ne sont pas vides
+
+            $.ajax({
+
+                url : "cible_tchat.php", // on donne l'URL du fichier de traitement
+
+                type : "POST", // la requête est de type POST
+
+                data : "pseudo=" + pseudo + "&message=" + message // et on envoie nos données
+
+            });
+            $('#messages').append("<p>" + pseudo + " dit : " + message + "</p>"); // on ajoute le message dans la zone prévue
+
+        }
+    });*/
+    $(function () {
+
+        $("#monForm").submit(function () {
+
+            $("#loader").show(); //gif
+
+            //.val() recuperation de valeur entré dans le formulaire
+            pseudo = $(this).find("input[name=pseudo]").val();
+            message = $(this).find("textarea[name=message]").val();
+            alert(pseudo);
+            alert(message);
+
+            $.post('cible_tchat.php', {
+                message: message,
+                pseudo: pseudo
+
+            }, function (data) {
+                $("#loader").hide();
+                alert(data);
+               
+                var text = data;
+                var obj = JSON.parse(text);
+
+
+
+            })
+
+            return false;
+
+        });
+
+    });
+
+    
+
+    </script>
+
+
+
+    </body>
+
+</html>

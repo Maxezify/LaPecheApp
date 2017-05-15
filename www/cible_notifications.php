@@ -14,7 +14,7 @@
 	}
 	
 
-		$lecture=$bdd ->prepare('SELECT ID_notif, Paiement_peche, Message, Nom_personne_debite, ID_utilisateurs
+		$lecture=$bdd ->prepare('SELECT ID_notif, Paiement_peche, Type, Nom_personne_debite, Nom_boutique_credite, ID_utilisateurs
 							 	  FROM notifications 
 							 	  WHERE ID_utilisateurs = :ID_utilisateurs');
 
@@ -37,8 +37,9 @@
 
 			$infos_notifications['ID_notif'] = $resultat['ID_notif'];
 			$infos_notifications['Paiement_peche'] = $resultat['Paiement_peche'];
+			$infos_notifications['Type'] = $resultat['Type'];
 			$infos_notifications['Nom_personne_debite'] = $resultat['Nom_personne_debite'];
-			$infos_notifications['Message'] = $resultat['Message'];
+			$infos_notifications['Nom_boutique_credite'] = $resultat['Nom_boutique_credite'];
 			$infos_notifications['ID_utilisateurs'] = $resultat['ID_utilisateurs'];
 
 			$tab[$i]=$infos_notifications;

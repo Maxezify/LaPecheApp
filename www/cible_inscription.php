@@ -46,6 +46,7 @@
 									
 				//hachage du mot de passe
 				$mdp_hache = sha1($_POST['mdp']);
+				
 						
 				//insertion dans la table utilisateurs des infos de la personne lors de son inscription
 				$reponse =$bdd->prepare('INSERT INTO utilisateurs(Nom,Prenom,Email,Mot_de_passe,Membre_depuis) 
@@ -69,15 +70,15 @@
 				$resultat = $lecture->fetch();
 
 
-				//Initialisation du porte monnaie de peche de la personne (peche = 0)
+				//Initialisation du porte monnaie de peche de la personne (peche = 20)
 				$reponse2 =$bdd->prepare('INSERT INTO peche(Nombre_peche,ID_utilisateurs) 
 										 VALUES(:nombre_peche,:ID_utilisateurs)');
 				$reponse2->execute(array(
-						'nombre_peche'=>0,
+						'nombre_peche'=>20,
 						'ID_utilisateurs'=>$resultat['ID_utilisateurs']));
 
 
-
+				sleep(1);
 				echo 'Vous vous êtes inscrit correctement !';
 
 				

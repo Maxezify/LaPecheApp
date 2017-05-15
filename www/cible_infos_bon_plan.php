@@ -47,7 +47,7 @@
 		//Recherche des bons plans en focntion du commerce de l'utilisateurconnecté
 		$lecture=$bdd ->prepare('SELECT ID_bon_plan, Description, Date_debut, Date_fin, Status
 							 FROM bon_plan 
-							 WHERE ID_commercant = :ID_commercant');
+							 WHERE ID_commercant = :ID_commercant ORDER BY ID_bon_plan DESC');
 
 		$lecture->execute(array(
 					'ID_commercant' => $infos_boutique['ID_commercant'] ));	

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var nom = window.localStorage.getItem("nom");
+            var email = window.localStorage.getItem("email");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+
+    <body style="background-image:url('img/image3.png');">
+
+                <nav class="orange lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+
+                <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_bon_plan.html"><i class="material-icons">today</i>Les bons plans</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_persos.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="page_tchat.html">
+                            <i class="material-icons">chat</i>
+                            Chat
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons"><img src="img/out.png" width="24px" height="24px" /></i>
+                            Déconnexion
+                        </a>
+                    </li>
+
+
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+            </div>
+      </nav>
+
+        <div class="section no-pad-bot" id="index-banner">
+
+            <div class="container">
+
+                <h4 class="header center orange-text">Page en construction, disponible prochainemnt</h4>
+
+                <h5 class="header center ">Chat</h5>
+
+                <!-- Div la liste des commerces -->
+
+                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+
+                 <br />
+
+                <style type="text/css">
+
+ 
+                    #messages {
+                            word-wrap: break-word;  
+                      max-width: 100%;
+                    }  
+
+                    * {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    body {
+                       
+                        font-family: 'Helvetica Neue', arial, sans-serif;
+                        font-weight: 200;
+                    }
+
+                    h1 {
+                        font-family: 'Oswald', sans-serif;
+                        font-size: 4em;
+                        font-weight: 400;
+                        margin: 0 0 20px;
+                        text-align: center;
+                        text-shadow: 1px 1px 0 #fff, 2px 2px 0 #bbb;
+                    }
+                        
+                    h3 {
+                        
+                        font-size:20px;
+                        font-weight: bold;
+                        color:#66bb6a;
+                    }
+                    
+                    p {
+                        font-size:18px;   
+                    }
+                        
+                    .centered {
+                        text-align: center;
+                    }
+                    .wrapper {
+                        width: 100%;
+                        padding: 30px 10px;
+                    }
+                    .container {
+                        width: 100%;
+                        margin: 0 auto;
+                    }
+
+
+                    @media (max-width: 800px) {
+                        .container {
+                            width: auto;
+                            padding: 0 10px;
+                        }
+                    }
+
+
+                </style>
+
+                <!-- les messages du tchat -->
+                <div class="wrapper">
+                    <div class="row center">
+                        <span id="messages">
+                                
+                        </span>
+                     
+                    </div>
+                    <div class="row center">
+                        <span id="new_messages">
+                                
+                        </span>
+                    </div>
+                </div>
+                
+
+
+                <form method="POST" action="#" id="monForm">
+
+                  <!--  <div class="row center">
+                        <label for="Pseudo" style="font-weight: bold; color:black">Pseudo</label>
+                        <div class="col s12">
+                            <input type="text" name="pseudo" id="pseudo" />
+                        </div>
+                    </div>-->
+
+                    <div class="row center">
+                        <label for="Message" style="font-weight: bold; color:black">Message</label>
+                        <div class="col s12">
+                            <textarea name="message" id="message"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row center">
+                        <div class="col s12">
+                            <div class="btn-large waves-effect waves-light orange">
+                                <input type="submit" name="submit" value="Envoyez votre message !" id="envoi" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+
+
+
+
+            </div>  
+
+        </div>
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+
+       //Insertion du message dans la bdd
+        $(function () {
+
+            $("#monForm").submit(function () {
+
+                $("#loader").show(); //gif
+
+                //.val() recuperation de valeur entré dans le formulaire
+
+                //pseudo = $(this).find("input[name=pseudo]").val();
+                message = $(this).find("textarea[name=message]").val();
+               // alert(pseudo);
+               /* alert(message);
+                alert(id_utili);
+                alert(prenom);
+                alert(nom);*/
+
+                $.post('cible_tchat1_insertion.php', {
+                    message: message,
+                    id_utili: id_utili,
+                    prenom: prenom,
+                    nom: nom
+                    //pseudo: pseudo
+
+                }, function (data) {
+                    $("#loader").hide();
+                    //alert(data);
+                    document.location.href="page_tchat.html";
+                   
+                    /*var text = data;
+                    var obj = JSON.parse(text);*/
+
+
+                })
+
+                return false;
+
+            });
+
+//Recuperations des messages de la bdd afin de les afficher
+        $.post('cible_tchat2_afficher.php', {}, function (data) {
+
+                //alert(data);
+
+                var text = data;
+                var obj = JSON.parse(text);
+                //alert(obj);
+                for (var i = 10; i >=1; i--) 
+                {
+                    $("#messages").append('<p><span style="font-weight: bold; color:black">'+obj[i].Nom_personne+' : </span>'+obj[i].Message+'</p>');
+                    window.localStorage.setItem("id_dernier_mess", obj[i].ID_tchat);
+
+                }
+                
+                
+                 
+                            
+                 
+            });
+
+        });
+
+        function charger(){
+
+
+            setTimeout( function(){
+
+            id_dernier_mess = window.localStorage.getItem('id_dernier_mess');
+            //alert(id_dernier_mess);
+
+            $.post('cible_tchat3_actualiser.php', {
+                id_dernier_mess: id_dernier_mess
+
+            }, function (data) {
+
+                //alert(data);
+                var status;
+                if(data == 'Il n\'y a eu aucun nouveaux messages ces 5 dernieres secondes.')
+                {
+                    document.getElementById('new_messages').innerHTML = data; 
+                    
+                }
+                else
+                {
+                    var text = data;
+                    var obj = JSON.parse(text);
+                    //alert(obj);
+                    for (var i = obj[0]; i >=1; i--) 
+                    {
+                        $("#messages").append('<p><span style="font-weight: bold; color:black">'+obj[i].Nom_personne+' : </span>'+obj[i].Message+'</p>');
+                        window.localStorage.setItem("id_dernier_mess", obj[i].ID_tchat);
+
+                    }
+                    document.getElementById('new_messages').innerHTML = ''; 
+                }
+                
+                 
+            });
+
+        charger();
+
+    }, 5000);
+
+}
+
+
+charger();
+
+
+
+
+
+    
+
+        </script>
+
+
+
+    </body>
+
+</html>
