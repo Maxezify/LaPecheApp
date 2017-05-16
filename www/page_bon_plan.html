@@ -40,6 +40,22 @@
                 document.location.href="page_connexion.html";
             }
         </script>
+        <style>
+        
+            td {
+                
+                font-size: 20px;
+                font-weight: bold;
+                color:#757575;
+                
+                
+                
+                
+            }
+        
+        
+        
+        </style>
 
     </head>
 
@@ -130,10 +146,8 @@
 
         <div class="section no-pad-bot" id="index-banner">
 
-            <div class="container">
-
                 <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Bons Plans</span></h4>
-                <br/>
+
                 
 
                 <div class="col s12">
@@ -143,13 +157,14 @@
                         </a>
                     </div>
                 </div>
-
-                <div class="col s12">
+                    <br />
                     <div class="row center">
                         <div id="i">
-                           <p style="font-weight:bold;">Bon plan en cours</p>
+                           <div class="row" style="background-color:#ffa726; margin-left:auto; margin-right:auto; width:100%;">
+                            <span class="white-text" style="font-size: 25px; font-weight: bold;">Bon(s) Plan(s) en cours</span>
+                        </div>
                             <table>
-                                <tbody id="bon_plan_en_cours"></tbody> 
+                                <tbody id="bon_plan_en_cours" style="font-size: 20px; font-weight: bold;"></tbody> 
                             </table>
                         
                         </div>
@@ -159,7 +174,9 @@
 
                 <div class="col s12">
                     <div class="row center">
-                       <p style="font-weight:bold;">Anciens bons plans</p>
+                       <div class="row" style="background-color:#ffa726; margin-left:auto; margin-right:auto; width:100%;">
+                            <span class="white-text" style="font-size: 25px; font-weight: bold;">Ancien(s) Bon(s) Plan(s)</span>
+                        </div>
                         
                         <table>
                                 <tbody id="anciens_bon_plans"></tbody> 
@@ -180,13 +197,6 @@
                 <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
       </div>
 
-
-
-
-
-            </div>  
-
-        </div>
 
 
 

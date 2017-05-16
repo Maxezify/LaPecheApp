@@ -116,7 +116,7 @@
 
                 <div class="col s12">
                     <div class="row center">
-                        <div id="nom_boutique">
+                        <div id="nom_boutique" style="font-size:20px; font-weight:bold; color:#757575;">
                         </div>
                     </div>
                 </div>
@@ -126,13 +126,14 @@
                 <form method="post" action="#" id="monForm">
 
 <div class="row center">
-                        <label style="font-weight:bold; color:black;" for="prenom">Description</label>
+                        <label style="font-weight:bold; color:black; font-size:15px;" for="prenom">Description</label>
                         <div class="col s12">
+                                <br />
                             <textarea
                                 style="background-color:white;" name="description" id="description"  class="validate" placeholder="Tapez une description du bon plan"></textarea> 
                         </div>
                     </div>
-                         <p style="margin-left:auto; margin-right:auto; width:35px; font-weight:bold;">Durée</p>
+                         <label style="margin-left:auto; color:black; margin-right:auto; width:35px; font-weight:bold; font-size:15px;">Durée</label>
                          <div class="container">
                              <table>
                                  <tr>
@@ -151,11 +152,14 @@
 
                     <div class="row center">
                         <div class="col s12">
-                            <div class="btn-large waves-effect waves-light orange">
+                            <div class="btn-large waves-effect waves-light orange" style="margin-right:30px;">
                                 <input type="submit" id="bon_plan" value="Créer" />
                             </div>
+                             <div class="btn-large waves-effect waves-light orange" style="margin-left:30px;">
+                                 <a style="color:white;" href="javascript:history.go(-1)">Retour</a>
+                            </div> 
+      </div>
                         </div>
-                    </div>
 
                     <!-- Gif du chargement qui s'active lors du click-->
                     <div class="row center">
@@ -163,14 +167,6 @@
                             <img src="img/ajax-loader.gif" alt="loader" />
                         </div>
                     </div>
-
-        
-
-            
-                 <div class="row center">
-                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
-      </div>
-
 
                  </form>
                 </div>

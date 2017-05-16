@@ -37,9 +37,6 @@
             .ui-helper-hidden-accessible { display:none; }
         </style>
 
-       <nav class="orange lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Mon compte</a>
-
                 <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
         <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
@@ -115,18 +112,14 @@
       </nav>
 
         <div class="section no-pad-bot" id="index-banner">
-            <div class="container">
                 <div class="row center">
                 <h4 class="green-text lighten-1" style="font-weight:bold;">Paiement</h4>
-                </div>
-
-                <div class="row center">
                     <h6 class="header col s12 light" style=" font-weight: bold; color:black;">Pour effectuer votre achat, veuillez indiquez le nom du magasin ainsi que le montant de la transaction.</h6>
                 </div>
 
 
 
-                <div class="row center" style="background-color:#ffa726;">
+                <div class="row center" style="background-color:#ffa726; margin-left:auto; margin-right:auto; width:100%;">
                             <span class="white-text" style="font-size: 25px; font-weight: bold;">Votre solde actuel</span>
                         </div>
 
@@ -142,8 +135,6 @@
                         <div id="statut_paiement" style="font-weight: bold; color:black; font-size: 16px;"></div>
                         </div>
                 </div> 
-                        <br/> 
-
 
 
                 <!-- Début du Formulaire-->
@@ -151,29 +142,30 @@
 
                     <div class="row center">                                          
                         <div class="col s12">
-                            <label for="paiement_nom_commerce" style="font-weight: bold; color:black">Nom du commerce</label>
-                            <input style="font-weight: bold; color:black" type="text" name="paiement_nom_commerce" id="paiement_nom_commerce"  class="validate" placeholder="Tapez le nom du commerce">
+                            <label for="paiement_nom_commerce" style="font-weight: bold; color:black; font-size:15px;">Nom du commerce</label>
+                            <br/>
+                            <input style="font-weight: bold; color:black; width:175px;" type="text" name="paiement_nom_commerce" id="paiement_nom_commerce"  class="validate" placeholder="Tapez le nom du commerce">
                         </div>
                     </div>
-
-                        <br/>
-
                     <div class="row center">
-                        <label for="montant" style="font-weight: bold; color:black">Montant</label>
                         <div class="col s12">
-                            <input style="font-weight: bold; color:black" type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
+                        <label for="montant" style="font-weight: bold; color:black; font-size:15px;">Montant</label>
+                            <br />
+                            <input style="font-weight: bold; color:black; width:175px;" type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
                         </div>
                     </div>
-
-                        <br/>
-
+                    
                     <div class="row center">
                         <div class="col s12">
-                            <div class="btn-large waves-effect waves-light orange">
+                            <div class="btn-large waves-effect waves-light orange" style="margin-right:30px;">
                                 <input type="submit" id="payer" value="Payer" />
                             </div>
+                <div class="btn-large waves-effect waves-light orange" style="margin-left:30px;">
+                    <a style="color:white;" href="javascript:history.go(-1)">Retour</a>
+                                </div> 
+      </div>
+                            
                         </div>
-                    </div>
 
                     <!-- Gif du chargement qui s'active lors du click -->
                     <div class="row center">
@@ -184,15 +176,6 @@
 
                 </form>
                 <!-- Fin du Formulaire-->
-
-                <div class="row center">
-                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
-      </div>
-
-                 
-                    
-
-            </div>
         </div>
 
 
