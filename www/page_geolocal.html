@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+   <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Application La Pêche</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+      
+    <style>
+       #map {
+        height: 610px;
+           margin-top:15px;
+        width: 100%;
+       }
+        
+        
+    </style>
+  </head>
+  <body style="background-image:url('img/image3.png');">
+       <nav class="orange lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+
+                <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
+
+                <!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="img/fond.jpg">
+                            </div>
+                            <img class="circle" id="profilpic" src="img/max.jpg">
+                            <span class="white-text name" id="name"><span id="prenom"></span></span>
+                            <span class="white-text email" id="email"><span id="email"></span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_connecte.html">
+                            <i class="material-icons">home</i>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_bon_plan.html"><i class="material-icons">today</i>Les bons plans</a>
+                    </li>
+                    <li>
+                        <div class="divider">
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_liste_commerce.html">
+                            <i class="material-icons">store</i>
+                            Les commerçants
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_modif_boutique.html">
+                            <i class="material-icons">settings</i>
+                            Mon commerce
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="page_infos_persos.html">
+                            <i class="material-icons">contacts</i>
+                            Mes infos personnelles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="page_tchat.html">
+                            <i class="material-icons">chat</i>
+                            Chat
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="waves-effect" href="deconnexion.html">
+                            <i class="material-icons"><img src="img/out.png" width="24px" height="24px" /></i>
+                            Déconnexion
+                        </a>
+                    </li>
+
+
+                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+
+            </div>
+      </nav>
+
+   <h5 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Localisation de la boutique</span></h5>
+    <div id="map"></div>
+    <script>
+        
+      function initMap() {
+          // appel vers la page pour récupérer les infos de la boutique
+          // la page PHP avec les infos retourne un format JSON
+          // les données JSON sont ajoutées à la variable donnees_boutique
+          // les donnéees JSON doivent contenir un champ "adresse" contenant l'dresse de la boutique
+          
+          //localStorage.setItem('adresse_geolocation', "IUT de Vélizy");
+          var adresse = localStorage.getItem('adresse_geolocation');
+          
+          //$.get('recup_adresse_boutique.php', {}, function (donnees_boutique) {
+              $.get(
+                  "https://maps.googleapis.com/maps/api/geocode/json?address="+adresse+"&region=france&sensor=false&key=AIzaSyDg-xbVHfaBsGwmRWCa8hEKWqPztL_OzUk",
+                  {},
+                  function (data, textStatus, jqXHR) {
+                      console.log(data);
+                      var positions = data.results[0].geometry.location;
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 16,
+                          center: positions
+                        });
+                        var marker = new google.maps.Marker({
+                          position: positions,
+                          map: map
+                        });
+                  }
+              );
+          //});
+      }
+        
+function askGoogleMapsCoordinates(where, callback){
+    console.log("Asking Google where is " + where);
+
+    var onLoad = function(e){
+
+        if(e.status == 'OK'){
+            callback({
+                latitude    : e.results[0].geometry.location.lat,
+                longitude   : e.results[0].geometry.location.lng
+            });
+        } else {
+            onError(e);
+        }
+    };
+
+    var onError = function(e){
+        console.log("Error " + e);
+        return false;
+    };
+
+    $.ajax('https://maps.googleapis.com/maps/api/geocode/json?address='+encodeURIComponent(where), {
+        success: onLoad
+    });
+}
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Vb5rNTtY93DddVwSm4b8nFq3FbuTHNk&callback=initMap">
+    </script>
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+  </body>
+</html>
