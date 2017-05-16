@@ -33,10 +33,9 @@
 
     <body style="background-image:url('img/image3.png');">
 
-    <style type="text/css">
-
-                    .ui-helper-hidden-accessible { display:none; }
-    </style>
+        <style type="text/css">
+            .ui-helper-hidden-accessible { display:none; }
+        </style>
 
        <nav class="orange lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Mon compte</a>
@@ -138,6 +137,11 @@
                     </div>
                 </div>
               
+                <div class="row center">
+                    <div class="col s12">
+                        <div id="statut_paiement" style="font-weight: bold; color:black; font-size: 16px;"></div>
+                        </div>
+                </div> 
                         <br/> 
 
 
@@ -157,7 +161,7 @@
                     <div class="row center">
                         <label for="montant" style="font-weight: bold; color:black">Montant</label>
                         <div class="col s12">
-                            <input type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
+                            <input style="font-weight: bold; color:black" type="text" name="montant" id="montant" class="validate" placeholder="Tapez le montant de la transaction">
                         </div>
                     </div>
 
@@ -261,8 +265,41 @@
                         id_utili_co: id_utili
                     }, function (data) {
                         $("#loader").hide();
-                        alert(data);
-                        window.location.reload();
+                        //alert(data);
+
+                        if(data=='Veuillez ne pas choisir votre magasin.')
+                        {
+                            document.getElementById('statut_paiement').innerHTML = 'Veuillez ne pas choisir votre magasin.';
+                            window.scrollTo(0, 0);
+                        }
+                        else if(data=='Le montant doit être un nombre (sans espace).')
+                        {
+                            document.getElementById('statut_paiement').innerHTML = 'Le montant doit être un nombre (sans espace).';
+                            window.scrollTo(0, 0);
+                        }
+                        else if(data=='Veuillez rentrer un nom de Boutique correspondant à la liste.')
+                        {
+                            document.getElementById('statut_paiement').innerHTML = 'Veuillez rentrer un nom de Boutique correspondant à la liste.';
+                            window.scrollTo(0, 0);
+                        }
+                        else if(data=='Un ou plusieurs champs n\'ont pas été remplis, veuillez vérifier.')
+                        {
+                            document.getElementById('statut_paiement').innerHTML = 'Un ou plusieurs champs n\'ont pas été remplis, veuillez vérifier.';
+                            window.scrollTo(0, 0);
+                        }
+                        else if(data=='Veuillez renseigner un montant inferieur ou égal à votre solde.')
+                        {
+                            document.getElementById('statut_paiement').innerHTML = 'Veuillez renseigner un montant inferieur ou égal à votre solde.';
+                            window.scrollTo(0, 0);
+                        }
+                        else
+                        {
+                            
+                            window.location.reload();
+                            window.scrollTo(0, 0);
+                        }
+
+                        
 
                         
                     })

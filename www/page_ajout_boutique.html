@@ -47,45 +47,7 @@
                             <span class="white-text email" id="email"><span id="email"></span></span>
                         </div>
                     </li>
-                    <li>
-                        <a class="waves-effect" href="page_connecte.html">
-                            <i class="material-icons">home</i>
-                            Accueil
-                        </a>
-                    </li>
-                    <li>
-                        <a class="waves-effect" href="page_bon_plan.html"><i class="material-icons">today</i>Les bons plans</a>
-                    </li>
-                    <li>
-                        <div class="divider">
-                            
-                        </div>
-                    </li>
-                    <li>
-                        <a class="waves-effect" href="page_liste_commerce.html">
-                            <i class="material-icons">store</i>
-                            Les commerçants
-                        </a>
-                    </li>
-                    <li>
-                        <a class="waves-effect" href="page_modif_boutique.html">
-                            <i class="material-icons">settings</i>
-                            Mon commerce
-                        </a>
-                    </li>
-                    <li>
-                        <a class="waves-effect" href="page_infos_persos.html">
-                            <i class="material-icons">contacts</i>
-                            Mes infos personnelles
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="waves-effect" href="page_tchat.html">
-                            <i class="material-icons">chat</i>
-                            Chat
-                        </a>
-                    </li>
+                    
 
                     <li>
                         <a class="waves-effect" href="deconnexion.html">
@@ -108,7 +70,11 @@
 
             <div class="container">
 
-                    <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Ajouter votre commerce</span></h4>
+                <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Ajouter votre commerce</span></h4>
+
+                <div class="row center">
+                    <h5 class="header col s12 light">Pour votre première connexion, veuillez remplir les informations concernant votre commerce.</h6>
+                </div>
 
                 <div class="row center">
                     <h6 style="font-weight:bold;" class="header col s12 light">Renseignez les champs ci-dessous</h6>
@@ -226,6 +192,7 @@
                     }, function (data) {
                         $("#loader").hide();
                         alert(data);
+                        document.location.href="page_connecte.html";
                     })
 
                     return false;

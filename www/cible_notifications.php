@@ -16,7 +16,8 @@
 
 		$lecture=$bdd ->prepare('SELECT ID_notif, Paiement_peche, Type, Nom_personne_debite, Nom_boutique_credite, ID_utilisateurs
 							 	  FROM notifications 
-							 	  WHERE ID_utilisateurs = :ID_utilisateurs');
+							 	  WHERE ID_utilisateurs = :ID_utilisateurs 
+							 	  ORDER BY ID_notif DESC');
 
 		$lecture->execute(array('ID_utilisateurs' => $_SESSION['ID']));	
 

@@ -111,13 +111,15 @@
 
             <div class="container">
 
-                <h4 class="header center orange-text">Page en construction, disponible prochainemnt</h4>
+                <h4 class="header center orange-text">Page en construction, disponible prochainement</h4>
 
                 <h5 class="header center ">Infos personnelles</h5>
 
                 <!-- Div la liste des commerces -->
 
-                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+              <div class="row center">
+                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
+      </div>
 
 
 
@@ -138,7 +140,10 @@
         <script type="text/javascript">
 
        
-
+                     //Prenom et Email de l'utilisateur connecté ------------------------------------
+            $("#prenom2").append('Bienvenue '+ prenom);
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
 
     
 

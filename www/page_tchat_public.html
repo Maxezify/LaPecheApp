@@ -35,7 +35,7 @@
 
     <body style="background-image:url('img/image3.png');">
 
-                <nav class="orange lighten-1" role="navigation">
+                 <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
 
                 <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
@@ -112,19 +112,15 @@
 
             <div class="container">
 
-                <h4 class="header center orange-text">Page en construction, disponible prochainemnt</h4>
+                <h4 class="header center orange-text">Page en construction, disponible prochainement</h4>
 
                 <h5 class="header center ">Chat</h5>
 
-                <!-- Div la liste des commerces -->
-
-                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
-
-                 <br />
+         
 
                 <style type="text/css">
 
-                    .ui-helper-hidden-accessible { display:none; }
+ 
                     #messages {
                             word-wrap: break-word;  
                       max-width: 100%;
@@ -200,35 +196,39 @@
                 
 
 
-                                <!-- Début du Formulaire-->
-                <form method="post" action="#" id="monForm">
+                <form method="POST" action="#" id="monForm">
 
-                    <div class="row center">                                          
+                  <!--  <div class="row center">
+                        <label for="Pseudo" style="font-weight: bold; color:black">Pseudo</label>
                         <div class="col s12">
-                            <label for="recherche" style="font-weight: bold; color:black">Nom du commerce</label>
-                            <input type="text" name="recherche" id="recherche"  class="validate" placeholder="Tapez le nom du commerce">
+                            <input type="text" name="pseudo" id="pseudo" />
+                        </div>
+                    </div>-->
+
+                    <div class="row center">
+                        <label for="Message" style="font-weight: bold; color:black">Message</label>
+                        <div class="col s12">
+                            <textarea name="message" id="message"></textarea>
                         </div>
                     </div>
+
                     <div class="row center">
                         <div class="col s12">
                             <div class="btn-large waves-effect waves-light orange">
-                                <input type="submit" id="Selectionner" value="Selectionner" />
+                                <input type="submit" name="submit" value="Envoyez votre message !" id="envoi" />
                             </div>
                         </div>
                     </div>
 
-                    <!-- Gif du chargement qui s'active lors du click -->
-                    <div class="row center">
-                      <div id="loader" style="display: none">
-                          <img src="img/ajax-loader.gif" alt="loader" />
-                      </div>
-                    </div>
+
 
                 </form>
-                <!-- Fin du Formulaire-->
 
 
 
+<div class="row center">
+                <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
+      </div>
 
 
             </div>  
@@ -242,57 +242,120 @@
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
 
         <script type="text/javascript">
+         //Prenom et Email de l'utilisateur connecté ------------------------------------
+            $("#prenom2").append('Bienvenue '+ prenom);
+            document.getElementById('prenom').innerHTML = prenom;
+            document.getElementById('email').innerHTML = email;  
+             //Insertion du message dans la bdd
+        $(function () {
 
-        //Liste déroulante des commerce enregistré dans la bdd --------------------------------
-        /*Pour fonctionner, ce widget doit prend un paramètre obligatoire, celui-ci nécessite d'utiliser une option indiquant la liste des propositions à afficher. Ce paramètre se nomme source, et prend en valeur un tableau contenant chaque suggestion
-        cf openclassroom */
+            $("#monForm").submit(function () {
 
-          $('#recherche').autocomplete({
-              source : 'cible_tchat_mp1.php',
-              focus: function (event, ui) {
-                $(".ui-helper-hidden-accessible").destroy();
-                event.preventDefault();
-            }
+                $("#loader").show(); //gif
 
-          });
-           
-        //-------------------------------------------------------------------------------------
-         //Modification du solde Peche pour l'utilisateur et le commercant de la boutique apres avoir payé sur le bouton Payer
-        /*function Confirmer(){
-          if (confirm("Etes vous sûr d'avoir correctement rempli les champs précédents ?")) 
-          {*/
+                //.val() recuperation de valeur entré dans le formulaire
 
-           $(function () {
-                $("#monForm").submit(function () {
+                //pseudo = $(this).find("input[name=pseudo]").val();
+                message = $(this).find("textarea[name=message]").val();
+               // alert(pseudo);
+               /* alert(message);
+                alert(id_utili);
+                alert(prenom);
+                alert(nom);*/
 
-                    $("#loader").show(); //gif
+                $.post('cible_tchat1_insertion.php', {
+                    message: message,
+                    id_utili: id_utili,
+                    prenom: prenom,
+                    nom: nom
+                    //pseudo: pseudo
 
-                    //.val() recuperation de valeur entré dans le formulaire
-                    nom_commerce_mp = $(this).find("input[name=recherche]").val();
-                    window.localStorage.setItem("nom_commerce_mp", nom_commerce_mp);
-                 
-                    
-                    
-                    $.post('cible_tchat_mp2.php', {
-                        nom_commerce: recherche
-                       
-                    }, function (data) {
-                        $("#loader").hide();
-                        alert(data);
-                        //window.location.reload();
-                        document.location.href="page_tchat_mp2_nom.html";
+                }, function (data) {
+                    $("#loader").hide();
+                    //alert(data);
+                    document.location.href="page_tchat_public.html";
+                   
+                    /*var text = data;
+                    var obj = JSON.parse(text);*/
 
-                        
-                    })
 
-                    return false;
+                })
 
-                });
+                return false;
 
             });
+
+//Recuperations des messages de la bdd afin de les afficher
+        $.post('cible_tchat2_afficher.php', {}, function (data) {
+
+                //alert(data);
+
+                var text = data;
+                var obj = JSON.parse(text);
+                //alert(obj);
+                for (var i = 10; i >=1; i--) 
+                {
+                    $("#messages").append('<p><span style="font-weight: bold; color:black">'+obj[i].Nom_personne+' : </span>'+obj[i].Message+'</p>');
+                    window.localStorage.setItem("id_dernier_mess", obj[i].ID_tchat);
+
+                }
+                
+                
+                 
+                            
+                 
+            });
+
+        });
+        //--------------------------------------------------------------------------
+
+
+        //Chargement de la page toutes les 5 secondes pour verifier s'il y a eu des nouveaux messages
+        function charger(){
+
+
+            setTimeout( function(){
+
+                id_dernier_mess = window.localStorage.getItem('id_dernier_mess');
+                //alert(id_dernier_mess);
+
+                $.post('cible_tchat3_actualiser.php', {
+                    id_dernier_mess: id_dernier_mess
+
+                }, function (data) {
+
+                    //alert(data);
+                    var status;
+                    if(data == 'Il n\'y a eu aucun nouveaux messages ces 5 dernieres secondes.')
+                    {
+                        document.getElementById('new_messages').innerHTML = data; 
+                        
+                    }
+                    else
+                    {
+                        var text = data;
+                        var obj = JSON.parse(text);
+                        //alert(obj);
+                        for (var i = obj[0]; i >=1; i--) 
+                        {
+                            $("#messages").append('<p><span style="font-weight: bold; color:black">'+obj[i].Nom_personne+' : </span>'+obj[i].Message+'</p>');
+                            window.localStorage.setItem("id_dernier_mess", obj[i].ID_tchat);
+
+                        }
+                        document.getElementById('new_messages').innerHTML = ''; 
+                    }
+                    
+                     
+                });
+
+                charger();
+
+            }, 5000);
+
+        }
+        charger();
 
 
 

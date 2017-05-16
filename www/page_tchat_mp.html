@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-   <head>
+<html lang="en">
+
+    <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
@@ -10,19 +11,31 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-      
-    <style>
-       #map {
-        height: 610px;
-           margin-top:15px;
-        width: 100%;
-       }
-        
-        
-    </style>
-  </head>
-  <body style="background-image:url('img/image3.png');">
-       <nav class="orange lighten-1" role="navigation">
+
+
+
+        <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
+        <script type="text/javascript">
+
+            //var historyObj = window.history.back();
+            var nombre = window.localStorage.getItem("nombre");
+            var prenom = window.localStorage.getItem("prenom");
+            var nom = window.localStorage.getItem("nom");
+            var email = window.localStorage.getItem("email");
+            var id_utili = window.localStorage.getItem("ID_utilisateurs");
+
+            if(nombre!=42)
+            {
+                document.location.href="page_connexion.html";
+            }
+        </script>
+
+    </head>
+
+
+    <body style="background-image:url('img/image3.png');">
+
+                <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
 
                 <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
@@ -95,50 +108,114 @@
             </div>
       </nav>
 
-   <h5 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Localisation de la boutique</span></h5>
-    <div id="map"></div>
-    <script>
-        
-      function initMap() {
-        var uluru = {lat: 48.7822608, lng: 2.216785399999935};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-        
-function askGoogleMapsCoordinates(where, callback){
-    console.log("Asking Google where is " + where);
+        <div class="section no-pad-bot" id="index-banner">
 
-    var onLoad = function(e){
+            <div class="container">
 
-        if(e.status == 'OK'){
-            callback({
-                latitude    : e.results[0].geometry.location.lat,
-                longitude   : e.results[0].geometry.location.lng
-            });
-        } else {
-            onError(e);
-        }
-    };
+                <h4 class="header center orange-text">Page en construction, disponible prochainemnt</h4>
 
-    var onError = function(e){
-        console.log("Error " + e);
-        return false;
-    };
+                <h5 class="header center ">Chat</h5>
 
-    $.ajax('https://maps.googleapis.com/maps/api/geocode/json?address='+encodeURIComponent(where), {
-        success: onLoad
-    });
-}
+                <!-- Div la liste des commerces -->
 
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Vb5rNTtY93DddVwSm4b8nFq3FbuTHNk&callback=initMap">
-    </script>
-  </body>
+                 <button type="button"><a href="javascript:history.go(-1)">Retour</a></button> 
+
+                 <br />
+
+                <style type="text/css">
+
+                    .ui-helper-hidden-accessible { display:none; }
+                    #messages {
+                            word-wrap: break-word;  
+                      max-width: 100%;
+                    }  
+
+                    * {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    body {
+                       
+                        font-family: 'Helvetica Neue', arial, sans-serif;
+                        font-weight: 200;
+                    }
+
+                    h1 {
+                        font-family: 'Oswald', sans-serif;
+                        font-size: 4em;
+                        font-weight: 400;
+                        margin: 0 0 20px;
+                        text-align: center;
+                        text-shadow: 1px 1px 0 #fff, 2px 2px 0 #bbb;
+                    }
+                        
+                    h3 {
+                        
+                        font-size:20px;
+                        font-weight: bold;
+                        color:#66bb6a;
+                    }
+                    
+                    p {
+                        font-size:18px;   
+                    }
+                        
+                    .centered {
+                        text-align: center;
+                    }
+                    .wrapper {
+                        width: 100%;
+                        padding: 30px 10px;
+                    }
+                    .container {
+                        width: 100%;
+                        margin: 0 auto;
+                    }
+
+
+                    @media (max-width: 800px) {
+                        .container {
+                            width: auto;
+                            padding: 0 10px;
+                        }
+                    }
+
+
+                </style>
+
+
+
+
+
+
+
+            </div>  
+
+        </div>
+
+
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+
+        <script type="text/javascript">
+
+
+          
+
+
+
+
+
+    
+
+        </script>
+
+
+
+    </body>
+
 </html>

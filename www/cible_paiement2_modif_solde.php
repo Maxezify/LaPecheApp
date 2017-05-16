@@ -12,7 +12,7 @@
 	}
 	
 
-	echo $_POST['nom_commerce'];
+	/*echo $_POST['nom_commerce'];
 	echo '<pre>';
 	echo $_POST['montant'];
 	echo '<pre>';
@@ -25,7 +25,7 @@
 	echo $_POST['nom_commerce_utili_co'];
 	echo '<pre>';
 	echo $_POST['id_utili_co'];
-	echo '<pre>';
+	echo '<pre>';*/
 
 
 
@@ -150,7 +150,7 @@
 		echo 'Un ou plusieurs champs n\'ont pas été remplis, veuillez vérifier.';
 	}
 
-	echo 'gfh';
+	
 
 
 

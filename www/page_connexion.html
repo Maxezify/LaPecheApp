@@ -54,7 +54,13 @@
                         </div>
                         </div>
 
-                          <br/>
+                        
+                        <div class="row center">
+                            <div class="col s12">
+                                <div id="statut_connexion" style="font-weight: bold; color:black; font-size: 15px;"></div>
+                            </div>
+                        </div> 
+                         <br/>
 
                           <div class="row center">
                         <div class="col s12">
@@ -69,8 +75,12 @@
                             <img src="img/ajax-loader.gif" alt="loader" />
                         </div>
 
+
+
                     </form>
                     <!-- Fin du Formulaire-->
+
+
 
                   
                     <a style="margin-top:10px;" href="page_inscription.html"><h6 style="font-weight: bold; color:black; margin-top:10px;">Vous n'avez pas de compte ?</h6></a>
@@ -105,6 +115,15 @@
 
                             $("#loader").hide();
                             //alert(data);
+
+                            if(data=='Erreur de connexion (MDP ou email invalide).')
+                            {
+                                document.getElementById('statut_connexion').innerHTML = 'Mot de passe ou email invalide).';
+                            }
+                            else if(data=='Veuillez indiquer votre email ou/et votre mot de passe.')
+                            {
+                                document.getElementById('statut_connexion').innerHTML = 'Veuillez indiquer votre email ou/et votre mot de passe.';
+                            }
 
                             var text = data;
                             var obj = JSON.parse(text);

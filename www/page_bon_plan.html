@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
     <head>
 
@@ -16,6 +16,18 @@
 
         <!-- Script permettant de vérifier si la personne est connecté, sinon redirection sur la page de connexeion -->
         <script type="text/javascript">
+
+            /*var reload = window.localStorage.getItem("reload"); 
+            if(reload==1)
+            {
+                window.location.reload();
+                reload = window.localStorage.setItem("reload", 2);
+                if(reload==2)
+                {
+                    window.localStorage.removeItem("reload");
+                }
+                
+            }    */
 
             //var historyObj = window.history.back();
             var nombre = window.localStorage.getItem("nombre");
@@ -34,8 +46,17 @@
 
     <body style="background-image:url('img/image3.png');">
 
-                <nav class="orange lighten-1" role="navigation">
+        <nav class="orange lighten-1" role="navigation">
             <div class="nav-wrapper container">
+
+            <style type="text/css">
+                
+                td, th {
+                    padding: 15px 5px;
+                    display: table-cell;
+                    text-align: center;
+                }
+            </style>
 
                 <a id="logo-container" href="#" class="brand-logo">Mon compte</a>
 
@@ -111,32 +132,9 @@
 
             <div class="container">
 
-               <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Bons Plans</span></h4>
+                <h4 class="header center orange-text"><span  class="green-text lighten-1" style="font-weight: bold;">Bons Plans</span></h4>
                 <br/>
-                <div class="col s12">
-                    <div class="row center">
-                        <div id="i">
-                            <p style="font-weight:bold;">Bon plan en cours</p>
-                            <table>
-                                <tbody id="bon_plan_en_cours"></tbody> 
-                            </table>
-                        
-                        </div>
-                    </div>
-                </div>
-
- <br/>
-                <div class="col s12">
-                    <div class="row center">
-                        <p style="font-weight:bold;">Anciens bons plans</p>
-                        
-                        <table>
-                                <tbody id="anciens_bon_plans"></tbody> 
-                        </table>
-                      
-                    </div>
-                </div>
-                 <br/>
+                
 
                 <div class="col s12">
                     <div class="row center">
@@ -146,13 +144,38 @@
                     </div>
                 </div>
 
+                <div class="col s12">
+                    <div class="row center">
+                        <div id="i">
+                           <p style="font-weight:bold;">Bon plan en cours</p>
+                            <table>
+                                <tbody id="bon_plan_en_cours"></tbody> 
+                            </table>
+                        
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col s12">
+                    <div class="row center">
+                       <p style="font-weight:bold;">Anciens bons plans</p>
+                        
+                        <table>
+                                <tbody id="anciens_bon_plans"></tbody> 
+                        </table>
+                      
+                    </div>
+                </div>
+
+
+
                
                                  
                             
                           
 
             
-               
                  <div class="row center">
                 <div class="btn-large waves-effect waves-light orange"><a style="color:white;" href="javascript:history.go(-1)">Retour</a></div> 
       </div>
@@ -181,44 +204,45 @@
             //Prenom et Email de l'utilisateur connecté
             document.getElementById('prenom').innerHTML = prenom;
             document.getElementById('email').innerHTML = email; 
+                //Actualise le status des bon plan en fonction de la date du jour
+                $.post('cible_actualiser_bon_plan.php', {}, function (data) {
 
-        //Recuperation des infos concernant les bons plans (en cours et ancien)
+                        //Recuperation des infos concernant les bons plans (en cours et ancien)
+            $.post('cible_infos_bon_plan.php', {}, function (data2) {
 
-            $.post('cible_infos_bon_plan.php', {}, function (data) {
+                        //alert(data2);
 
-                        alert(data);
-
-                        var text = data;
+                        var text = data2;
                         var obj = JSON.parse(text);
+                        console.log(obj);
                         //alert(obj);
                         
                         for (var i = 1; i <=obj[0]; i++) 
                         {   
+                            console.log(obj[i]);
                             if(obj[i].Status=='En cours')
                             {
                                 $("#bon_plan_en_cours").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                                //alert(obj[i].Description);
                             }
                             else if(obj[i].Status=='Ancien')
                             {
                                 $("#anciens_bon_plans").append('<tr><td>'+obj[i].Description+'</td></tr>');
+                                //alert(obj[i].Description);
                             }
-
-
                             
                         }
                         
-                    });
-
-                //Actualise le status des bon plan en fonction de la date du jour
-                $.post('cible_actualiser_bon_plan.php', {}, function (data) {
-
-                        alert(data);
-
-                        var text = data;
-                        var obj = JSON.parse(text);
-                        //alert(obj);
                         
-                    });            
+                    });
+                        
+                });  
+       
+
+
+
+
+
             
 
 
